@@ -43,9 +43,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <!-- Main content -->
         <section class="content">
 			首页
-			
-			
-			
         </section><!-- /.content -->
       </div><!-- /.content-wrapper -->
 		<jsp:include page="footer.jsp"></jsp:include>

@@ -7,10 +7,10 @@
       <footer class="main-footer">
         <!-- To the right -->
         <div class="pull-right hidden-xs">
-          Anything you want
+          工作流后台管理系统
         </div>
         <!-- Default to the left -->
-        <strong>Copyright &copy; 2015 <a href="#">Company</a>.</strong> All rights reserved.
+        <strong>Copyright &copy; 2015 <a href="#">Company</a>.</strong>   v4java.
       </footer>
       
         <!-- Add the sidebar's background. This div must be placed

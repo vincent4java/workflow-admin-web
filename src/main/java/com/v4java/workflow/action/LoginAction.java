@@ -24,9 +24,14 @@ public class LoginAction extends BaseAction {
 	private static final Logger logger = Logger.getLogger(LoginAction.class);
 	@Autowired
 	private IXf9SystemService xf9SystemService;
+	
+	@RequestMapping(value="/goLogin",method = RequestMethod.GET)
 	public String goLogin(){
+		Xf9System xf9System = (Xf9System) session.getAttribute(SessionConst.ADMIN_USER);
+		if (null!=xf9System) {
+			return "index";
+		}
 		return "login";
-		
 	}
 	
 	@ResponseBody 
@@ -40,13 +45,13 @@ public class LoginAction extends BaseAction {
 		int count  = loginMsg.getFailCount();
 		loginMsg.setFlag(false);
 		if (count <=2) {
-			String eCode = (String) request.getSession().getAttribute(SessionConst.CODE);
+			//String eCode = (String) request.getSession().getAttribute(SessionConst.CODE);
 			
 			try {
 				Xf9System xf9System = xf9SystemService.selectXf9SystemByUserCode(account);
 				
 				if (xf9System!=null) {
-					if (userPwd.equals(MD5Utils.md5SaltMd5(xf9System.getUserPwd(), xf9System.getUserCode()))) {
+					if (xf9System.getUserPwd().equals(MD5Utils.md5SaltMd5(userPwd, xf9System.getUserCode()))) {
 						loginMsg.setFlag(true);
 						loginMsg.setFailCount(0);
 						loginMsg.setMsg(LoginMsgConst.ACCOUNT_SUCCESS);
