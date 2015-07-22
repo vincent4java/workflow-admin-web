@@ -14,7 +14,7 @@ import com.v4java.workflow.common.BaseAction;
 import com.v4java.workflow.constant.LoginMsgConst;
 import com.v4java.workflow.constant.SessionConst;
 import com.v4java.workflow.pojo.Xf9System;
-import com.v4java.workflow.service.IXf9SystemService;
+import com.v4java.workflow.service.admin.IXf9SystemService;
 import com.v4java.workflow.vo.LoginMsg;
 
 @Controller

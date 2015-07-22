@@ -15,8 +15,8 @@ import com.v4java.workflow.common.AdminConst;
 import com.v4java.workflow.common.BTables;
 import com.v4java.workflow.common.DateUtil;
 import com.v4java.workflow.query.admin.JobsQuery;
-import com.v4java.workflow.service.IJobsService;
-import com.v4java.workflow.view.admin.JobsVO;
+import com.v4java.workflow.service.admin.IJobsService;
+import com.v4java.workflow.vo.admin.JobsVO;
 
 @Controller
 @Scope("prototype")
