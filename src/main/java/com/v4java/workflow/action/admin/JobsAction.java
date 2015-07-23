@@ -11,11 +11,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.v4java.workflow.common.AdminConst;
-import com.v4java.workflow.common.BTables;
 import com.v4java.workflow.common.DateUtil;
+import com.v4java.workflow.constant.AdminConst;
 import com.v4java.workflow.query.admin.JobsQuery;
 import com.v4java.workflow.service.admin.IJobsService;
+import com.v4java.workflow.vo.BTables;
 import com.v4java.workflow.vo.admin.JobsVO;
 
 @Controller
