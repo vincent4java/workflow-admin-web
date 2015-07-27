@@ -14,7 +14,7 @@ public class LoginInterceptor implements HandlerInterceptor {
 	public LoginInterceptor() { }  
 
 	public boolean preHandle(HttpServletRequest request,HttpServletResponse response, Object handler) throws Exception {
-		String url = request.getServletPath();
+		//String url = request.getServletPath();
 		
 		return true;
 	}
