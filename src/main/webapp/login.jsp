@@ -5,7 +5,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>系统用户登录</title>
 <link href="./login/login.css" rel="stylesheet" rev="stylesheet" type="text/css" media="all">
-<script src="http://static.lostandlove.com/plugins/jQuery/jQuery-2.1.4.min.js"></script>
+<script src="http://static.workflow.com/plugins/jQuery/jQuery-2.1.4.min.js"></script>
 <script type="text/javascript" src="./login/jquery.SuperSlide.js"></script>
 <script type="text/javascript" src="./login/Validform_v5.3.2_min.js"></script>
 

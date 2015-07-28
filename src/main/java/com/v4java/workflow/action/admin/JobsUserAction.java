@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.v4java.workflow.common.BaseAction;
 import com.v4java.workflow.pojo.JobsUser;
 import com.v4java.workflow.query.admin.JobsUserQuery;
 import com.v4java.workflow.service.admin.IJobsUserService;
@@ -21,7 +22,7 @@ import com.v4java.workflow.vo.admin.JobsUserVO;
 @Controller
 @Scope("prototype")
 @RequestMapping("/jobsUser")
-public class JobsUserAction {
+public class JobsUserAction extends BaseAction{
 	
 	private static final Logger LOGGER = Logger.getLogger(JobsUserAction.class);
 	

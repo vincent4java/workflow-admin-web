@@ -11,4 +11,7 @@ public class SessionConst {
 	public final static String ADMIN_USER_PERMISSIONS="ADMIN_USER_PERMISSIONS";
 
 	public final static String CODE="CODE";
+	
+	public final static String SYSTEM_ID="SYSTEM_ID";
+	
 }

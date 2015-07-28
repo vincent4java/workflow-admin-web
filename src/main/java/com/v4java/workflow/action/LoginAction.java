@@ -57,6 +57,7 @@ public class LoginAction extends BaseAction {
 						loginMsg.setMsg(LoginMsgConst.ACCOUNT_SUCCESS);
 						xf9System.setUserPwd(null);
 						session.setAttribute(SessionConst.ADMIN_USER, xf9System);
+						session.setAttribute(SessionConst.SYSTEM_ID, xf9System.getId());
 					}else {
 						loginMsg.setMsg(LoginMsgConst.PWD_ERROR);
 					}

@@ -7,10 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.v4java.workflow.common.BaseAction;
 import com.v4java.workflow.common.DateUtil;
 import com.v4java.workflow.constant.AdminConst;
 import com.v4java.workflow.pojo.Jobs;
@@ -22,7 +24,7 @@ import com.v4java.workflow.vo.admin.JobsVO;
 @Controller
 @Scope("prototype")
 @RequestMapping("/jobs")
-public class JobsAction {
+public class JobsAction extends BaseAction{
 
 	@Autowired
 	private IJobsService jobsService;
@@ -36,7 +38,7 @@ public class JobsAction {
 		
 	}
 	
-	
+/*	
 	@RequestMapping(value = "/findJobsJson/{systemId}",method = RequestMethod.GET)
 	public @ResponseBody BTables<JobsVO> findJobsJson(@PathVariable Integer systemId){
 		BTables<JobsVO> bTables = new BTables<JobsVO>();
@@ -73,7 +75,7 @@ public class JobsAction {
 			LOGGER.error("查询岗位错误", e);
 		}
 		return bTables;
-	}
+	}*/
 	
 
 	@RequestMapping(value = "/insertJobs/{systemId}/{name}/{desc}",method = RequestMethod.GET)
@@ -94,13 +96,14 @@ public class JobsAction {
 	}	
 	
 	
-/*	@RequestMapping(value = "/findJobsJson",method = RequestMethod.POST)
+	@RequestMapping(value = "/findJobsJson",method = RequestMethod.POST)
 	public @ResponseBody BTables<JobsVO> findAdminUserJson(@RequestBody JobsQuery jobsQuery){
 		BTables<JobsVO> bTables = new BTables<JobsVO>();
 		List<JobsVO> jobsVOs = null;
+		jobsQuery.setSystemId(getSystemId());
 		try {
-			jobsVOs  = jobsService.findJobs(jobsQuery);
-			int total = jobsService.findJobsCount(jobsQuery);
+			jobsVOs  = jobsService.findJobsBySystemId(jobsQuery);
+			int total = jobsService.findJobsCountBySystemId(jobsQuery);
 			StringBuffer op = null;
 			for (JobsVO jobsVO : jobsVOs) {
 				op = new StringBuffer();
@@ -125,10 +128,10 @@ public class JobsAction {
 			bTables.setRows(jobsVOs);
 			bTables.setTotal(total);
 		} catch (Exception e) {
-			logger.error("查询岗位错误", e);
+			LOGGER.error("查询岗位错误", e);
 		}
 		return bTables;
-	}*/
+	}
 	
 	
 }

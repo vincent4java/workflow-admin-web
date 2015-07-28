@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.v4java.workflow.common.BaseAction;
 import com.v4java.workflow.pojo.WorkFlowModel;
 import com.v4java.workflow.query.admin.WorkFlowModelQuery;
 import com.v4java.workflow.service.admin.IWorkFlowModelService;
@@ -19,7 +20,7 @@ import com.v4java.workflow.vo.BTables;
 @Controller
 @Scope("prototype")
 @RequestMapping("/WorkFlowModel")
-public class WorkFlowModelAction {
+public class WorkFlowModelAction extends BaseAction{
 
 	
 	private static final Logger LOGGER = Logger.getLogger(WorkFlowModelAction.class);

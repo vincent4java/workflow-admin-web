@@ -6,20 +6,20 @@
     <title>后台管理系统</title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
     <!-- Bootstrap 3.3.4 -->
-    <link href="http://static.lostandlove.com/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="http://static.workflow.com/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <!-- Font Awesome Icons -->
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
     <!-- Ionicons -->
     <link href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css" />
     <!-- bootstrap-table -->
-	<link rel="stylesheet" href="http://static.lostandlove.com/bootstrap-table/bootstrap-table.css"  type="text/css">
+	<link rel="stylesheet" href="http://static.workflow.com/bootstrap-table/bootstrap-table.css"  type="text/css">
 	<!-- datetimepicker -->
-	<link rel="stylesheet" href="http://static.lostandlove.com/bootstrap-datetimepicker/css/bootstrap-datetimepicker.css"  type="text/css">
+	<link rel="stylesheet" href="http://static.workflow.com/bootstrap-datetimepicker/css/bootstrap-datetimepicker.css"  type="text/css">
     <!-- Theme style -->
-    <link href="http://static.lostandlove.com/dist/css/AdminLTE.min.css" rel="stylesheet" type="text/css" />
+    <link href="http://static.workflow.com/dist/css/AdminLTE.min.css" rel="stylesheet" type="text/css" />
     <!-- AdminLTE Skins. Choose a skin from the css/skins 
          folder instead of downloading all of them to reduce the load. -->
-    <link href="http://static.lostandlove.com/dist/css/skins/_all-skins.min.css" rel="stylesheet" type="text/css" />
+    <link href="http://static.workflow.com/dist/css/skins/_all-skins.min.css" rel="stylesheet" type="text/css" />
 	<!--  -->
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -95,21 +95,21 @@
 		<jsp:include page="/footer.jsp"></jsp:include>
     </div><!-- ./wrapper -->
     <!-- jQuery 2.1.4 -->
-    <script src="http://static.lostandlove.com/plugins/jQuery/jQuery-2.1.4.min.js"></script>
+    <script src="http://static.workflow.com/plugins/jQuery/jQuery-2.1.4.min.js"></script>
     <!-- Bootstrap 3.3.2 JS -->
-    <script src="http://static.lostandlove.com/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="http://static.workflow.com/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
     <!-- DATA TABES SCRIPT -->
     <script src="../bootstrap-table.js"></script>
-    <script src="http://static.lostandlove.com/bootstrap-table/locale/bootstrap-table-zh-CN.js"></script>
+    <script src="http://static.workflow.com/bootstrap-table/locale/bootstrap-table-zh-CN.js"></script>
     <!-- datetimepicker -->
-    <script src="http://static.lostandlove.com/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
-    <script src="http://static.lostandlove.com/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+    <script src="http://static.workflow.com/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+    <script src="http://static.workflow.com/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
     <!-- SlimScroll -->
-    <script src="http://static.lostandlove.com/plugins/slimScroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+    <script src="http://static.workflow.com/plugins/slimScroll/jquery.slimscroll.min.js" type="text/javascript"></script>
     <!-- FastClick -->
-    <script src='http://static.lostandlove.com/plugins/fastclick/fastclick.min.js'></script>
+    <script src='http://static.workflow.com/plugins/fastclick/fastclick.min.js'></script>
     <!-- AdminLTE App -->
-    <script src="http://static.lostandlove.com/dist/js/app.min.js" type="text/javascript"></script>
+    <script src="http://static.workflow.com/dist/js/app.min.js" type="text/javascript"></script>
     <!-- page script -->
 <script>
     $(function () {
