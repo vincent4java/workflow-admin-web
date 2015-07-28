@@ -27,7 +27,7 @@ public class JobsAction {
 	@Autowired
 	private IJobsService jobsService;
 	
-	private static final Logger logger = Logger.getLogger(JobsAction.class);
+	private static final Logger LOGGER = Logger.getLogger(JobsAction.class);
 	
 	
 	@RequestMapping(value = "/findJobs",method = RequestMethod.GET)
@@ -70,7 +70,7 @@ public class JobsAction {
 			bTables.setRows(jobsVOs);
 			bTables.setTotal(total);
 		} catch (Exception e) {
-			logger.error("查询岗位错误", e);
+			LOGGER.error("查询岗位错误", e);
 		}
 		return bTables;
 	}
@@ -87,7 +87,7 @@ public class JobsAction {
 			try {
 				n = jobsService.insertJobs(jobs);
 			} catch (Exception e) {
-				logger.error("添加岗位错误", e);
+				LOGGER.error("添加岗位错误", e);
 			}
 			return n;
 		

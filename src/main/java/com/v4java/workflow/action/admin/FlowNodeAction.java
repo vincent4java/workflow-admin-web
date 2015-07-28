@@ -23,7 +23,7 @@ import com.v4java.workflow.vo.BTables;
 @RequestMapping("/flowNode")
 public class FlowNodeAction {
 
-	private static final Logger logger = Logger.getLogger(FlowNodeAction.class);
+	private static final Logger LOGGER = Logger.getLogger(FlowNodeAction.class);
 
 	@Autowired
 	private IFlowNodeService flowNodeService;
@@ -39,7 +39,7 @@ public class FlowNodeAction {
 			bTables.setRows(flowNodes);
 			bTables.setTotal(count);
 		} catch (Exception e) {
-			logger.error("查询模板为"+modelId+"节点错误", e);
+			LOGGER.error("查询模板为"+modelId+"节点错误", e);
 		}
 		return bTables;
 	}
