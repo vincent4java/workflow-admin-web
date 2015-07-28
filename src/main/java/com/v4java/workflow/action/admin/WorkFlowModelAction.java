@@ -58,8 +58,7 @@ public class WorkFlowModelAction {
 		try {
 			n = workFlowModelService.insertWorkFlowModel(flowModel);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LOGGER.error("新增工作流模板错误", e);
 		}
 		return n;
 	}
