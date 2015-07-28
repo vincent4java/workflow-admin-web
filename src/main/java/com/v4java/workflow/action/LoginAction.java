@@ -48,7 +48,7 @@ public class LoginAction extends BaseAction {
 			//String eCode = (String) request.getSession().getAttribute(SessionConst.CODE);
 			
 			try {
-				Xf9System xf9System = xf9SystemService.selectXf9SystemByUserCode(account);
+				Xf9System xf9System = xf9SystemService.findXf9SystemByUserCode(account);
 				
 				if (xf9System!=null) {
 					if (xf9System.getUserPwd().equals(MD5Utils.md5SaltMd5(userPwd, xf9System.getUserCode()))) {
