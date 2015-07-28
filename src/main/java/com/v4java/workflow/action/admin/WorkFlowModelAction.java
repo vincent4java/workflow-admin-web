@@ -45,9 +45,28 @@ public class WorkFlowModelAction extends BaseAction{
 		try {
 			List<WorkFlowModelVO> workFlowModels = workFlowModelService.findWorkFlowModel(workFlowModelQuery);
 			int count = workFlowModelService.findWorkFlowModelCount(workFlowModelQuery);
+			StringBuffer op = null;
 			for (WorkFlowModelVO workFlowModelVO : workFlowModels) {
 				workFlowModelVO.setStatusName(AdminConst.STATUS_NAME[workFlowModelVO.getStatus()]);
 				workFlowModelVO.setCreateTimeName(DateUtil.datetimeToStr(workFlowModelVO.getCreateTime()));
+				op = new StringBuffer();
+				//冻结/解冻 按钮
+				op.append("<button name=\"updateStatus\"");
+				//data-id
+				op.append("data-name=\"status\" data-id=\"");
+				op.append(workFlowModelVO.getId());
+				op.append("\" ");
+				//data-val
+				op.append("data-status=\"");
+				op.append(AdminConst.OP_STATUS[workFlowModelVO.getStatus()]);
+				op.append("\" ");
+				op.append("type=\"button\" op-url=\"updateJobsnStatus.do\" class=\"btn btn-warning btn-flat\">");
+				op.append(AdminConst.OP_STATUS_NAME[workFlowModelVO.getStatus()]);
+				op.append("</button>");
+				op.append("<a href=\"/flowNode/findFlowNode/"+workFlowModelVO.getId()+".do\""+" class=\"btn btn-warning btn-flat\">编辑节点");
+				op.append("</a>");
+				workFlowModelVO.setOperation(op.toString());
+				op = null;
 			}
 			bTables.setTotal(count);
 			bTables.setRows(workFlowModels);

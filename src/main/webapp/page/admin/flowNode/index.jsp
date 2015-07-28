@@ -40,7 +40,7 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>
-            工作流管理
+            节点
           </h1>
           <ol class="breadcrumb">
           </ol>
@@ -51,7 +51,7 @@
             <div class="col-xs-12">
               <div class="box">
                 <div class="box-header">
-                  <h3 class="box-title">工作流</h3>
+                  <h3 class="box-title">节点</h3>
                 </div><!-- /.box-header -->
                 <div class="box-body">
 							
@@ -59,6 +59,7 @@
 					    <div class="form-inline" role="form">
 					        <div class="form-group">
 					            <div class="input-group">
+					            <input type="hidden"  name="modelId" value="${modelId }">
 					                <input class="form-control" type="text" placeholder="名称" name="name">
 					            </div>
 					        </div>
@@ -73,13 +74,12 @@
 					        <button type="submit" class="btn btn-default" name="querySearch">搜索</button>
 					    </div>
 					</div>
-					<table id="data-table" data-url="findWorkFlowModelJson.do" data-height="555" data-method="post" data-show-refresh="true" 
+					<table id="data-table" data-url="/flowNode/findFlowNodeJson.do" data-height="555" data-method="post" data-show-refresh="true" 
 					data-side-pagination="server" data-pagination="true" data-page-list="[10, 20, 50]" data-search="false">
 						   <thead>
 						    <tr>
-					        <th data-field="name" data-align="center" >名称</th>
-					        <th data-field="busyTypeId" data-align="center" >类型id</th>
-					        <th data-field="description" data-align="center" >描述</th>
+						    <th data-field="userCode" data-align="center" >人员Code</th>
+					        <th data-field="userName" data-align="center" >人员名称</th>
 					        <th data-field="statusName" data-align="center" class="col-md-1 status">是否可用</th>
 					        <th data-field="createTimeName" data-align="center" >创建时间</th>
 					        <th data-field="operation" data-align="center" class="col-md-2">操作</th>

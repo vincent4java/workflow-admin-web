@@ -106,9 +106,9 @@ public class JobsAction extends BaseAction{
 			int total = jobsService.findJobsCountBySystemId(jobsQuery);
 			StringBuffer op = null;
 			for (JobsVO jobsVO : jobsVOs) {
-				op = new StringBuffer();
 				jobsVO.setStatusName(AdminConst.STATUS_NAME[jobsVO.getStatus()]);
 				jobsVO.setCreateTimeName(DateUtil.datetimeToStr(jobsVO.getCreateTime()));
+				op = new StringBuffer();
 				//冻结/解冻 按钮
 				op.append("<button name=\"updateStatus\"");
 				//data-id
@@ -119,9 +119,11 @@ public class JobsAction extends BaseAction{
 				op.append("data-status=\"");
 				op.append(AdminConst.OP_STATUS[jobsVO.getStatus()]);
 				op.append("\" ");
-				op.append("type=\"button\" op-url=\"updateAdminStatus.do\" class=\"btn btn-warning btn-flat\">");
+				op.append("type=\"button\" op-url=\"updateJobsnStatus.do\" class=\"btn btn-warning btn-flat\">");
 				op.append(AdminConst.OP_STATUS_NAME[jobsVO.getStatus()]);
 				op.append("</button>");
+				op.append("<a href=\"/jobsUser/findJobsUser/"+jobsVO.getId()+".do\""+" class=\"btn btn-warning btn-flat\">添加人员");
+				op.append("</a>");
 				jobsVO.setOperation(op.toString());
 				op = null;
 			}

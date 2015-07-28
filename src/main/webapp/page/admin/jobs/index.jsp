@@ -98,7 +98,7 @@
     <!-- Bootstrap 3.3.2 JS -->
     <script src="http://static.workflow.com/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
     <!-- DATA TABES SCRIPT -->
-    <script src="../bootstrap-table.js"></script>
+    <script src="http://static.workflow.com/bootstrap-table/bootstrap-table.js"></script>
     <script src="http://static.workflow.com/bootstrap-table/locale/bootstrap-table-zh-CN.js"></script>
     <!-- datetimepicker -->
     <script src="http://static.workflow.com/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
