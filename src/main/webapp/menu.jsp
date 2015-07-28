@@ -30,7 +30,7 @@
             <li class="treeview"><a href="#"><i class="fa fa-link"></i> <span>工作流管理</span> <i class="fa fa-angle-left pull-right"></i></a>
             <ul class="treeview-menu" style="display: none;">
            		<li><a href="./jobs/findJobs.do">岗位管理</a></li>
-            	<li><a href="./adminWorkflow/findAdminWorkFlow.do">审批模板</a></li>
+            	<li><a href="./workFlowModel/findWorkFlowModel.do">审批模板</a></li>
             </ul>
             </li>
           </ul>
