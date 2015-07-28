@@ -51,8 +51,9 @@ public class WorkFlowModelAction {
 		WorkFlowModel flowModel =new WorkFlowModel();
 		flowModel.setSystemId(systemId);
 		flowModel.setBusyTypeId(busyTypeId);
+		//在模板第一次建立没有节点
 		flowModel.setDescription("");
-		flowModel.setStatus(0);
+		flowModel.setStatus(1);
 		flowModel.setName(name);
 		flowModel.setModelText("");
 		try {

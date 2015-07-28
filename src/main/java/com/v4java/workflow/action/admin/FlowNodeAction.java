@@ -44,5 +44,26 @@ public class FlowNodeAction {
 		return bTables;
 	}
 	
+	@RequestMapping(value = "/insertFlowNode/{modelId}/{name}/{jobsId}/{sort}/{nextSort}/{nodeType}/{flowTest}",method = RequestMethod.GET)
+	public @ResponseBody int insertFlowNode(@PathVariable Integer modelId,@PathVariable String name,@PathVariable Integer jobsId,@PathVariable Integer sort,@PathVariable Integer nextSort,@PathVariable Integer nodeType, @PathVariable String flowTest){
+		FlowNode flowNode = new FlowNode();
+		flowNode.setFlowTest(flowTest);
+		flowNode.setJobsId(jobsId);
+		flowNode.setName(name);
+		flowNode.setModelId(modelId);
+		flowNode.setStatus(0);
+		flowNode.setSort(sort);
+		flowNode.setNextSort(nextSort);
+		flowNode.setNodeType(nodeType);
+		flowNode.setFlowTest(flowTest);
+		flowNode.setDescription(name);
+		int n = -1;
+		try {
+			n = flowNodeService.insertFlowNode(flowNode);
+		} catch (Exception e) {
+			LOGGER.error("插入节点错误", e);
+		}
+		return n;
+	}
 	
 }
