@@ -39,9 +39,14 @@
       <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-          <h1>
-            节点
-          </h1>
+					<nav class="navbar navbar-default" role="navigation">
+					   <div>
+					      <ul class="nav navbar-nav">
+					         <li class="active"><a href="view">查看节点</a></li>
+					         <li><a href="add">新增节点</a></li>
+					      </ul>
+					   </div>
+					</nav>
           <ol class="breadcrumb">
           </ol>
         </section>
@@ -54,7 +59,8 @@
                   <h3 class="box-title">节点</h3>
                 </div><!-- /.box-header -->
                 <div class="box-body">
-							
+					 <div class="tab-content"> 
+					<div class="tab-pane active" id="view">	
 					<div id="custom-toolbar">
 					    <div class="form-inline" role="form">
 					        <div class="form-group">
@@ -80,6 +86,9 @@
 						    <tr>
 						    <th data-field="name" data-align="center" >节点名称</th>
 						    <th data-field="nodeTypeName" data-align="center" >节点类型</th>
+						    <th data-field="sort" data-align="center" >节点序号</th>
+						    <th data-field="nextSort" data-align="center" >下一个节点序号</th>
+						    <th data-field="flowTest" data-align="center" >节点判断</th>
 					        <th data-field="description" data-align="center" >节点描述</th>
 					        <th data-field="statusName" data-align="center" class="col-md-1 status">是否可用</th>
 					        <th data-field="createTimeName" data-align="center" >创建时间</th>
@@ -88,6 +97,54 @@
    						 	</tr>	
    						 	</thead>
 					</table>
+					</div>
+						<div class="tab-pane" id="add">
+			             		<div class="col-md-6">
+		              			<!-- general form elements -->
+					              <div class="box box-primary">
+					                <div class="box-header">
+					                  <h3 class="box-title">新增节点</h3>
+					                </div><!-- /.box-header -->
+					                <!-- form start -->
+					                <form role="form" action="/flowNode/insertFlowNode.do" method="post">
+					                  <div class="box-body">
+					                    <div class="form-group">
+					                      <label for="">节点名称</label>
+					                      <input type="hidden"  name="modelId" value="${modelId }">
+					                      <input type="text" class="form-control" name="name" placeholder="节点名称">
+					                    </div>
+					                  <div class="form-group">
+					                      <label for="">节点类型</label>
+					                      <select name="nodeTypeId" class="form-control" >
+					                      	<option value="1">任务</option>
+					                      	<option value="2">判断</option>
+					                      	<option value="3">结束</option>
+					                      </select>
+					                    </div>
+					                   	${jobsVOsHTML }
+					                   <div class="form-group">
+					                      <label for="">节点序号</label>
+					                      <input type="number" class="form-control" name="sort" placeholder="节点序号">
+					                    </div>
+					                   <div class="form-group">
+					                      <label for="">下一个节点序号</label>
+					                      <input type="number" class="form-control" name="nextSort" placeholder="节点序号">
+					                    </div>
+					                    <div class="form-group">
+					                      <label for="">节点描述</label>
+					                      <input type="text" class="form-control" name="description" placeholder="节点描述">
+					                    </div>					                    					                    
+					                  </div><!-- /.box-body -->
+					
+					                  <div class="box-footer">
+					                    <button type="button" name="submit" class="btn btn-primary">保存</button>
+					                  </div>
+					                </form>
+					              </div><!-- /.box -->
+		              
+			            	</div>
+			              </div>
+					</div>
                 </div><!-- /.box-body -->
               </div><!-- /.box -->
             </div><!-- /.col -->
@@ -113,50 +170,7 @@
     <!-- AdminLTE App -->
     <script src="http://static.workflow.com/dist/js/app.min.js" type="text/javascript"></script>
     <!-- page script -->
-<script>
-    $(function () {
-    	$('#data-table').bootstrapTable();
-        
-    	 $(".form_datetime").datetimepicker({
-    		 	language:"zh-CN",
-    	        format: "yyyy-mm-dd HH:ii",
-    	        showMeridian: true,
-    	        autoclose: true,
-    	        todayBtn: true
-    	    });
-
-    	function params(){
-    		var table = $('#data-table');
-    		return '';
-    	}
-    	
-    	$("tbody").on("click","button[name='updateStatus']",function(){
-    		var obj = $(this);
-			var data = {};
-			data["id"]= obj.attr("data-id");
-			data[obj.attr("data-name")]=obj.attr("data-status");
-		    $.ajax({
-	             type: "POST",
-	             url: obj.attr("op-url"),
-	             contentType: 'application/json',
-	             dataType: 'json',
-	             data: JSON.stringify(data),
-	             success: function(data){
-							if(data.isSuccess==1){
-								obj.attr("data-status",data.opStatus);
-								obj.text(data.opStatusName);
-								var td =obj.parent().parent().find("."+data.target);
-								td.text(data.statusName);
-							}
-	               		}
-		    
-	         });
-    	});
-    	
-    });
-
-    
-</script>
+    <script type="text/javascript" src="/init.js"></script>
 
 </body>
 </html>

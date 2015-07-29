@@ -107,11 +107,11 @@
 			                <form role="form" action="/jobs/insertJobs.do" method="post">
 			                  <div class="box-body">
 			                    <div class="form-group">
-			                      <label for="exampleInputEmail1">岗位名称</label>
+			                      <label for="">岗位名称</label>
 			                      <input type="text" class="form-control" name="name" placeholder="岗位名称">
 			                    </div>
 			                    <div class="form-group">
-			                      <label for="exampleInputPassword1">岗位描述</label>
+			                      <label for="">岗位描述</label>
 			                      <input type="text" class="form-control" name="description" placeholder="岗位描述">
 			                    </div>
 			                  </div><!-- /.box-body -->

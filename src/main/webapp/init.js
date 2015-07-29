@@ -27,6 +27,12 @@
 					data[$(this).attr("name")]=$(this).val();
 				}
 			});
+			form.find("select").each(function(){
+				var val = $(this).val();
+				if(val!=''){
+					data[$(this).attr("name")]=$(this).val();
+				}
+			});
  			$.ajax({
 	             type: "POST",
 	             url: form.attr("action"),

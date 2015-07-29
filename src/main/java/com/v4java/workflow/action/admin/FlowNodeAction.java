@@ -18,9 +18,12 @@ import com.v4java.workflow.constant.AdminConst;
 import com.v4java.workflow.constant.FlowConst;
 import com.v4java.workflow.pojo.FlowNode;
 import com.v4java.workflow.query.admin.FlowNodeQuery;
+import com.v4java.workflow.query.admin.JobsQuery;
 import com.v4java.workflow.service.admin.IFlowNodeService;
+import com.v4java.workflow.service.admin.IJobsService;
 import com.v4java.workflow.vo.BTables;
 import com.v4java.workflow.vo.admin.FlowNodeVO;
+import com.v4java.workflow.vo.admin.JobsVO;
 
 
 
@@ -33,11 +36,34 @@ public class FlowNodeAction extends BaseAction {
 
 	@Autowired
 	private IFlowNodeService flowNodeService;
-	
+	@Autowired
+	private IJobsService jobsService;
 	
 	@RequestMapping(value = "/findFlowNode/{modelId}",method = RequestMethod.GET)
 	public String findFlowNode(@PathVariable Integer modelId){
 		request.setAttribute("modelId", modelId);
+		JobsQuery jobsQuery = new JobsQuery();
+		jobsQuery.setSystemId(getSystemId());
+		try {
+			List<JobsVO> jobsVOs = jobsService.findJobsBySystemId(jobsQuery);
+			StringBuffer html = new StringBuffer();
+			html.append("<div class=\"form-group\">");
+			html.append("<label for=\"\">岗位</label>");
+			html.append("<select name=\"jobsId\" class=\"form-control\" >");
+ 			for (JobsVO jobsVO : jobsVOs) {
+				html.append("<option value=\"");
+				html.append(jobsVO.getId());
+				html.append("\">");
+				html.append(jobsVO.getName());
+				html.append("</option>");
+			}
+			html.append("</select>");
+			html.append("</div>");
+			
+			request.setAttribute("jobsVOsHTML", html.toString());
+		} catch (Exception e) {
+			LOGGER.error( e);
+		}
 		return "page/admin/flowNode/index";
 		
 	}
@@ -79,19 +105,10 @@ public class FlowNodeAction extends BaseAction {
 		return bTables;
 	}
 	
-	@RequestMapping(value = "/insertFlowNode/{modelId}/{name}/{jobsId}/{sort}/{nextSort}/{nodeType}/{flowTest}",method = RequestMethod.GET)
-	public @ResponseBody int insertFlowNode(@PathVariable Integer modelId,@PathVariable String name,@PathVariable Integer jobsId,@PathVariable Integer sort,@PathVariable Integer nextSort,@PathVariable Integer nodeType, @PathVariable String flowTest){
-		FlowNode flowNode = new FlowNode();
-		flowNode.setFlowTest(flowTest);
-		flowNode.setJobsId(jobsId);
-		flowNode.setName(name);
-		flowNode.setModelId(modelId);
-		flowNode.setStatus(0);
-		flowNode.setSort(sort);
-		flowNode.setNextSort(nextSort);
-		flowNode.setNodeType(nodeType);
-		flowNode.setFlowTest(flowTest);
-		flowNode.setDescription(name);
+	@RequestMapping(value = "/insertFlowNode",method = RequestMethod.POST)
+	public @ResponseBody int insertFlowNode(@RequestBody FlowNode flowNode ){
+		flowNode.setStatus(AdminConst.STATUS_TRUE);
+		flowNode.setNodeType(flowNode.getNodeTypeId());
 		int n = -1;
 		try {
 			n = flowNodeService.insertFlowNode(flowNode);

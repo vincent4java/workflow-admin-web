@@ -81,14 +81,10 @@ public class JobsUserAction extends BaseAction{
 	}
 	
 	
-	@RequestMapping(value = "/insertJobsUser/{systemId}/{jobsId}/{userCode}/{userName}",method = RequestMethod.GET)
-	public  @ResponseBody int insertJobsUser(@PathVariable Integer systemId,@PathVariable Integer jobsId,@PathVariable String userCode,@PathVariable String userName){
-		JobsUser jobsUser = new JobsUser();
-		jobsUser.setJobsId(jobsId);
-		jobsUser.setStatus(0);
-		jobsUser.setSystemId(systemId);
-		jobsUser.setUserCode(userCode);
-		jobsUser.setUserName(userName);
+	@RequestMapping(value = "/insertJobsUser",method = RequestMethod.POST)
+	public  @ResponseBody int insertJobsUser(@RequestBody JobsUser jobsUser){
+		jobsUser.setStatus(AdminConst.STATUS_TRUE);
+		jobsUser.setSystemId(getSystemId());
 		List<JobsUser> jobsUsers = new ArrayList<JobsUser>();
 		jobsUsers.add(jobsUser);
 		int n = -1;
