@@ -51,10 +51,18 @@
             <div class="col-xs-12">
               <div class="box">
                 <div class="box-header">
-                  <h3 class="box-title">岗位</h3>
+					<nav class="navbar navbar-default" role="navigation">
+					   <div>
+					      <ul class="nav navbar-nav">
+					         <li class="active"><a href="view">查看岗位</a></li>
+					         <li><a href="add">新增岗位</a></li>
+					      </ul>
+					   </div>
+					</nav>
                 </div><!-- /.box-header -->
                 <div class="box-body">
-							
+                	<div class="tab-content"> 
+					<div class="tab-pane active" id="view">		
 					<div id="custom-toolbar">
 					    <div class="form-inline" role="form">
 					        <div class="form-group">
@@ -86,8 +94,39 @@
    						 	</tr>	
    						 	</thead>
 					</table>
+	              </div>
+	              <!--view  -->
+	              <div class="tab-pane" id="add">
+	             		<div class="col-md-6">
+              			<!-- general form elements -->
+			              <div class="box box-primary">
+			                <div class="box-header">
+			                  <h3 class="box-title">新增岗位</h3>
+			                </div><!-- /.box-header -->
+			                <!-- form start -->
+			                <form role="form" action="/jobs/insertJobs.do" method="post">
+			                  <div class="box-body">
+			                    <div class="form-group">
+			                      <label for="exampleInputEmail1">岗位名称</label>
+			                      <input type="text" class="form-control" name="name" placeholder="岗位名称">
+			                    </div>
+			                    <div class="form-group">
+			                      <label for="exampleInputPassword1">岗位描述</label>
+			                      <input type="text" class="form-control" name="description" placeholder="岗位描述">
+			                    </div>
+			                  </div><!-- /.box-body -->
+			
+			                  <div class="box-footer">
+			                    <button type="button" name="submit" class="btn btn-primary">保存</button>
+			                  </div>
+			                </form>
+			              </div><!-- /.box -->
+              
+	            	</div>
+	              </div>
                 </div><!-- /.box-body -->
               </div><!-- /.box -->
+              </div> <!-- tab -->
             </div><!-- /.col -->
           </div><!-- /.row -->
         </section><!-- /.content -->
@@ -111,51 +150,7 @@
     <!-- AdminLTE App -->
     <script src="http://static.workflow.com/dist/js/app.min.js" type="text/javascript"></script>
     <!-- page script -->
-<script>
-    $(function () {
-    	$('#data-table').bootstrapTable();
-        
-    	 $(".form_datetime").datetimepicker({
-    		 	language:"zh-CN",
-    	        format: "yyyy-mm-dd HH:ii",
-    	        showMeridian: true,
-    	        autoclose: true,
-    	        todayBtn: true
-    	    });
-
-    	function params(){
-    		var table = $('#data-table');
-    		return '';
-    	}
-    	
-    	$("tbody").on("click","button[name='updateStatus']",function(){
-    		var obj = $(this);
-			var data = {};
-			data["id"]= obj.attr("data-id");
-			data[obj.attr("data-name")]=obj.attr("data-status");
-		    $.ajax({
-	             type: "POST",
-	             url: obj.attr("op-url"),
-	             contentType: 'application/json',
-	             dataType: 'json',
-	             data: JSON.stringify(data),
-	             success: function(data){
-							if(data.isSuccess==1){
-								obj.attr("data-status",data.opStatus);
-								obj.text(data.opStatusName);
-								var td =obj.parent().parent().find("."+data.target);
-								td.text(data.statusName);
-							}
-	               		}
-		    
-	         });
-    	});
-    	
-    });
-
-    
-</script>
-
+	<script type="text/javascript" src="/init.js"></script>
 </body>
 </html>
 

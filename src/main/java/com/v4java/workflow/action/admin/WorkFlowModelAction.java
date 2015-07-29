@@ -6,7 +6,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -99,19 +99,14 @@ public class WorkFlowModelAction extends BaseAction{
 		return bTables;
 	}*/
 
-	@RequestMapping(value = "/insertWorkFlowModel/{systemId}/{busyTypeId}/{name}",method = RequestMethod.GET)
-	public @ResponseBody int insertWorkFlowModel(@PathVariable Integer systemId,@PathVariable Integer busyTypeId,@PathVariable String name){
+	@RequestMapping(value = "/insertWorkFlowModel",method = RequestMethod.POST)
+	public @ResponseBody int insertWorkFlowModel(@RequestBody WorkFlowModel workFlowModel){
 		int n = -1;
-		WorkFlowModel flowModel =new WorkFlowModel();
-		flowModel.setSystemId(systemId);
-		flowModel.setBusyTypeId(busyTypeId);
 		//在模板第一次建立没有节点
-		flowModel.setDescription("");
-		flowModel.setStatus(1);
-		flowModel.setName(name);
-		flowModel.setModelText("");
+		workFlowModel.setStatus(AdminConst.STATUS_FLASE);
+		workFlowModel.setSystemId(getSystemId());
 		try {
-			n = workFlowModelService.insertWorkFlowModel(flowModel);
+			n = workFlowModelService.insertWorkFlowModel(workFlowModel);
 		} catch (Exception e) {
 			LOGGER.error("新增工作流模板错误", e);
 		}

@@ -6,7 +6,6 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -78,13 +77,10 @@ public class JobsAction extends BaseAction{
 	}*/
 	
 
-	@RequestMapping(value = "/insertJobs/{systemId}/{name}/{desc}",method = RequestMethod.GET)
-		public @ResponseBody int insertJobs(@PathVariable Integer systemId,@PathVariable String name,@PathVariable String desc){
-			Jobs jobs = new Jobs();
-			jobs.setDescription(desc);
-			jobs.setName(name);
-			jobs.setSystemId(systemId);
-			jobs.setStatus(0);
+	@RequestMapping(value = "/insertJobs",method = RequestMethod.POST)
+		public @ResponseBody int insertJobs(@RequestBody Jobs jobs){
+			jobs.setSystemId(getSystemId());
+			jobs.setStatus(AdminConst.STATUS_TRUE);
 			int n = -1;
 			try {
 				n = jobsService.insertJobs(jobs);
