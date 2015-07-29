@@ -52,6 +52,7 @@ public class JobsUserAction extends BaseAction{
 			for (JobsUserVO jobsUserVO : jobsVOs) {
 				jobsUserVO.setStatusName(AdminConst.STATUS_NAME[jobsUserVO.getStatus()]);
 				jobsUserVO.setCreateTimeName(DateUtil.datetimeToStr(jobsUserVO.getCreateTime()));
+				jobsUserVO.setUpdateTimeName(DateUtil.datetimeToStr(jobsUserVO.getUpdateTime()));
 				op = new StringBuffer();
 				//冻结/解冻 按钮
 				op.append("<button name=\"updateStatus\"");

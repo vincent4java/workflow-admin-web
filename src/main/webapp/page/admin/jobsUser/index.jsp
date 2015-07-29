@@ -82,6 +82,7 @@
 					        <th data-field="userName" data-align="center" >人员名称</th>
 					        <th data-field="statusName" data-align="center" class="col-md-1 status">是否可用</th>
 					        <th data-field="createTimeName" data-align="center" >创建时间</th>
+					        <th data-field="updateTimeName" data-align="center" >最近修改时间</th>
 					        <th data-field="operation" data-align="center" class="col-md-2">操作</th>
    						 	</tr>	
    						 	</thead>

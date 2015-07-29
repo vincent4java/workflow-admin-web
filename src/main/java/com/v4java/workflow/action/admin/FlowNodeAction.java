@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.v4java.workflow.common.BaseAction;
 import com.v4java.workflow.common.DateUtil;
 import com.v4java.workflow.constant.AdminConst;
+import com.v4java.workflow.constant.FlowConst;
 import com.v4java.workflow.pojo.FlowNode;
 import com.v4java.workflow.query.admin.FlowNodeQuery;
 import com.v4java.workflow.service.admin.IFlowNodeService;
@@ -51,6 +52,8 @@ public class FlowNodeAction extends BaseAction {
 			for (FlowNodeVO flowNodeVO : flowNodeVOs) {
 				flowNodeVO.setStatusName(AdminConst.STATUS_NAME[flowNodeVO.getStatus()]);
 				flowNodeVO.setCreateTimeName(DateUtil.datetimeToStr(flowNodeVO.getCreateTime()));
+				flowNodeVO.setUpdateTimeName(DateUtil.datetimeToStr(flowNodeVO.getUpdateTime()));
+				flowNodeVO.setNodeTypeName(FlowConst.NODE_TYPE_NAME[flowNodeVO.getNodeType()]);
 				op = new StringBuffer();
 				//冻结/解冻 按钮
 				op.append("<button name=\"updateStatus\"");

@@ -49,6 +49,7 @@ public class WorkFlowModelAction extends BaseAction{
 			for (WorkFlowModelVO workFlowModelVO : workFlowModels) {
 				workFlowModelVO.setStatusName(AdminConst.STATUS_NAME[workFlowModelVO.getStatus()]);
 				workFlowModelVO.setCreateTimeName(DateUtil.datetimeToStr(workFlowModelVO.getCreateTime()));
+				workFlowModelVO.setUpdateTimeName(DateUtil.datetimeToStr(workFlowModelVO.getUpdateTime()));
 				op = new StringBuffer();
 				//冻结/解冻 按钮
 				op.append("<button name=\"updateStatus\"");

@@ -150,6 +150,9 @@ public class DateUtil {
 	 * @return
 	 */
 	public static String datetimeToStr(Timestamp datetime) {
+		if (datetime == null) {
+			return null;
+		}
 		return new SimpleDateFormat(datetimeFormat).format(datetime);
 	}
 
