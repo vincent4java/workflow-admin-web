@@ -107,12 +107,12 @@
 			                <form role="form" action="/jobsUser/insertJobsUser.do" method="post">
 			                  <div class="box-body">
 			                    <div class="form-group">
-			                      <label for="">岗位与人员名称</label>
+			                      <label for="">岗位与人员code</label>
 			                      <input type="hidden"  name="jobsId" placeholder="jobsId" value="${jobsId }">
 			                      <input type="text" class="form-control" name="userCode" placeholder="岗位与人员code">
 			                    </div>
 			                    <div class="form-group">
-			                      <label for="">岗位与人员描述</label>
+			                      <label for="">岗位与人员名称</label>
 			                      <input type="text" class="form-control" name="userName" placeholder="岗位与人员名称">
 			                    </div>
 			                  </div><!-- /.box-body -->

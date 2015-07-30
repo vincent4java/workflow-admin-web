@@ -18,6 +18,7 @@ import com.v4java.workflow.pojo.WorkFlowModel;
 import com.v4java.workflow.query.admin.WorkFlowModelQuery;
 import com.v4java.workflow.service.admin.IWorkFlowModelService;
 import com.v4java.workflow.vo.BTables;
+import com.v4java.workflow.vo.UpdateStatus;
 import com.v4java.workflow.vo.admin.WorkFlowModelVO;
 
 @Controller
@@ -61,7 +62,7 @@ public class WorkFlowModelAction extends BaseAction{
 				op.append("data-status=\"");
 				op.append(AdminConst.OP_STATUS[workFlowModelVO.getStatus()]);
 				op.append("\" ");
-				op.append("type=\"button\" op-url=\"updateJobsnStatus.do\" class=\"btn btn-warning btn-flat\">");
+				op.append("type=\"button\" op-url=\"/workFlowModel/updateWorkFlowModelStatus.do\" class=\"btn btn-warning btn-flat\">");
 				op.append(AdminConst.OP_STATUS_NAME[workFlowModelVO.getStatus()]);
 				op.append("</button>");
 				op.append("<a href=\"/flowNode/findFlowNode/"+workFlowModelVO.getId()+".do\""+" class=\"btn btn-warning btn-flat\">编辑节点");
@@ -111,6 +112,33 @@ public class WorkFlowModelAction extends BaseAction{
 			LOGGER.error("新增工作流模板错误", e);
 		}
 		return n;
+	}
+	
+
+	/**
+	 * 更改工作流模板状态
+	 * @return
+	 */
+	@RequestMapping(value = "/updateWorkFlowModelStatus",method = RequestMethod.POST)
+	public @ResponseBody UpdateStatus updateWorkFlowModelStatus(@RequestBody WorkFlowModel workFlowModel){
+		UpdateStatus updateStatus = new UpdateStatus();
+		try {
+			int n  = workFlowModelService.updateWorkFlowModelStatus(workFlowModel);
+			updateStatus.setIsSuccess(n);
+			if (n==1) {
+				int x =workFlowModel.getStatus();
+				updateStatus.setTarget("status");
+				updateStatus.setStatus(x);
+				updateStatus.setStatusName(AdminConst.STATUS_NAME[x]);
+				updateStatus.setOpStatus(AdminConst.OP_STATUS[x]);
+				updateStatus.setOpStatusName(AdminConst.OP_STATUS_NAME[x]);
+			}
+			updateStatus.setIsSuccess(n);
+		} catch (Exception e) {
+			LOGGER.error("更改工作流模板状态", e);
+		}
+		
+		return updateStatus;
 	}
 	
 }
