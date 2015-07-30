@@ -18,6 +18,7 @@ import com.v4java.workflow.pojo.Jobs;
 import com.v4java.workflow.query.admin.JobsQuery;
 import com.v4java.workflow.service.admin.IJobsService;
 import com.v4java.workflow.vo.BTables;
+import com.v4java.workflow.vo.UpdateStatus;
 import com.v4java.workflow.vo.admin.JobsVO;
 
 @Controller
@@ -36,46 +37,6 @@ public class JobsAction extends BaseAction{
 		return "page/admin/jobs/index";
 		
 	}
-	
-/*	
-	@RequestMapping(value = "/findJobsJson/{systemId}",method = RequestMethod.GET)
-	public @ResponseBody BTables<JobsVO> findJobsJson(@PathVariable Integer systemId){
-		BTables<JobsVO> bTables = new BTables<JobsVO>();
-		List<JobsVO> jobsVOs = null;
-		JobsQuery jobsQuery = new JobsQuery();
-		jobsQuery.setSystemId(systemId);
-		try {
-			jobsVOs  = jobsService.findJobsBySystemId(jobsQuery);
-			int total = jobsService.findJobsCountBySystemId(jobsQuery);
-			StringBuffer op = null;
-			for (JobsVO jobsVO : jobsVOs) {
-				op = new StringBuffer();
-				jobsVO.setStatusName(AdminConst.STATUS_NAME[jobsVO.getStatus()]);
-				jobsVO.setCreateTimeName(DateUtil.datetimeToStr(jobsVO.getCreateTime()));
-				//冻结/解冻 按钮
-				op.append("<button name=\"updateStatus\"");
-				//data-id
-				op.append("data-name=\"status\" data-id=\"");
-				op.append(jobsVO.getId());
-				op.append("\" ");
-				//data-val
-				op.append("data-status=\"");
-				op.append(AdminConst.OP_STATUS[jobsVO.getStatus()]);
-				op.append("\" ");
-				op.append("type=\"button\" op-url=\"updateAdminStatus.do\" class=\"btn btn-warning btn-flat\">");
-				op.append(AdminConst.OP_STATUS_NAME[jobsVO.getStatus()]);
-				op.append("</button>");
-				jobsVO.setOperation(op.toString());
-				op = null;
-			}
-			bTables.setRows(jobsVOs);
-			bTables.setTotal(total);
-		} catch (Exception e) {
-			LOGGER.error("查询岗位错误", e);
-		}
-		return bTables;
-	}*/
-	
 
 	@RequestMapping(value = "/insertJobs",method = RequestMethod.POST)
 		public @ResponseBody int insertJobs(@RequestBody Jobs jobs){
@@ -116,7 +77,7 @@ public class JobsAction extends BaseAction{
 				op.append("data-status=\"");
 				op.append(AdminConst.OP_STATUS[jobsVO.getStatus()]);
 				op.append("\" ");
-				op.append("type=\"button\" op-url=\"updateJobsnStatus.do\" class=\"btn btn-warning btn-flat\">");
+				op.append("type=\"button\" op-url=\"/jobs/updateJobsStatus.do\" class=\"btn btn-warning btn-flat\">");
 				op.append(AdminConst.OP_STATUS_NAME[jobsVO.getStatus()]);
 				op.append("</button>");
 				op.append("<a href=\"/jobsUser/findJobsUser/"+jobsVO.getId()+".do\""+" class=\"btn btn-warning btn-flat\">添加人员");
@@ -132,5 +93,32 @@ public class JobsAction extends BaseAction{
 		return bTables;
 	}
 	
+	
+	
+	/**
+	 * 更改岗位状态
+	 * @return
+	 */
+	@RequestMapping(value = "/updateJobsStatus",method = RequestMethod.POST)
+	public @ResponseBody UpdateStatus updateJobsStatus(@RequestBody Jobs jobs){
+		UpdateStatus updateStatus = new UpdateStatus();
+		try {
+			int n  = jobsService.updateJobsStatus(jobs);
+			updateStatus.setIsSuccess(n);
+			if (n==1) {
+				int x =jobs.getStatus();
+				updateStatus.setTarget("status");
+				updateStatus.setStatus(x);
+				updateStatus.setStatusName(AdminConst.STATUS_NAME[x]);
+				updateStatus.setOpStatus(AdminConst.OP_STATUS[x]);
+				updateStatus.setOpStatusName(AdminConst.OP_STATUS_NAME[x]);
+			}
+			updateStatus.setIsSuccess(n);
+		} catch (Exception e) {
+			LOGGER.error("更改岗位状态错误", e);
+		}
+		
+		return updateStatus;
+	}
 	
 }
