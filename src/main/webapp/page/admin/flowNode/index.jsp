@@ -131,6 +131,10 @@
 					                      <input type="number" class="form-control" name="nextSort" placeholder="节点序号">
 					                    </div>
 					                    <div class="form-group">
+					                      <label for="">判断规则</label>
+					                      <input type="text" class="form-control" name="flowTest" placeholder="判断规则">
+					                    </div>	
+					                    <div class="form-group">
 					                      <label for="">节点描述</label>
 					                      <input type="text" class="form-control" name="description" placeholder="节点描述">
 					                    </div>					                    					                    

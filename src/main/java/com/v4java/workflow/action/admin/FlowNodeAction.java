@@ -57,6 +57,7 @@ public class FlowNodeAction extends BaseAction {
 				html.append(jobsVO.getName());
 				html.append("</option>");
 			}
+ 			html.append("<option value=\"0\">无</option>");
 			html.append("</select>");
 			html.append("</div>");
 			
