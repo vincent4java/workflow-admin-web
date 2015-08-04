@@ -12,10 +12,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.v4java.utils.DateUtil;
 import com.v4java.workflow.common.BaseAction;
 import com.v4java.workflow.constant.AdminConst;
 import com.v4java.workflow.constant.FlowConst;
+import com.v4java.workflow.pojo.Compare;
 import com.v4java.workflow.pojo.FlowNode;
 import com.v4java.workflow.query.admin.FlowNodeQuery;
 import com.v4java.workflow.query.admin.JobsQuery;
@@ -47,7 +50,7 @@ public class FlowNodeAction extends BaseAction {
 		try {
 			List<JobsVO> jobsVOs = jobsService.findJobsBySystemId(jobsQuery);
 			StringBuffer html = new StringBuffer();
-			html.append("<div class=\"form-group\">");
+			html.append("<div class=\"form-group\" id=\"josIdDiv\">");
 			html.append("<label for=\"\">岗位</label>");
 			html.append("<select name=\"jobsId\" class=\"form-control\" >");
  			for (JobsVO jobsVO : jobsVOs) {
@@ -110,6 +113,9 @@ public class FlowNodeAction extends BaseAction {
 	public @ResponseBody int insertFlowNode(@RequestBody FlowNode flowNode ){
 		flowNode.setStatus(AdminConst.STATUS_TRUE);
 		flowNode.setNodeType(flowNode.getNodeTypeId());
+		if (flowNode.getNodeType()!=FlowConst.NODE_TYPE_TASK) {
+			flowNode.setJobsId(0);
+		}
 		int n = -1;
 		try {
 			n = flowNodeService.insertFlowNode(flowNode);

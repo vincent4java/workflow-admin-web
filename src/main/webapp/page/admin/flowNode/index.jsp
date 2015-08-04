@@ -53,7 +53,7 @@
         <!-- Main content -->
         <section class="content">
           <div class="row">
-            <div class="col-xs-12">
+            <div class="col-xs-16">
               <div class="box">
                 <div class="box-header">
                   <h3 class="box-title">节点</h3>
@@ -106,14 +106,14 @@
 					                  <h3 class="box-title">新增节点</h3>
 					                </div><!-- /.box-header -->
 					                <!-- form start -->
-					                <form role="form" action="/flowNode/insertFlowNode.do" method="post">
+					                <form role="form" action="/flowNode/insertFlowNode.do" method="post" name="flowNode">
 					                  <div class="box-body">
 					                    <div class="form-group">
 					                      <label for="">节点名称</label>
-					                      <input type="hidden"  name="modelId" value="${modelId }">
-					                      <input type="text" class="form-control" name="name" placeholder="节点名称">
+					                      <input type="hidden" id="modelId" name="modelId" value="${modelId }">
+					                      <input type="text" class="form-control" name="wfname" placeholder="节点名称" value="">
 					                    </div>
-					                  <div class="form-group">
+					                  <div class="form-group" id="nodeTypeDiv">
 					                      <label for="">节点类型</label>
 					                      <select name="nodeTypeId" class="form-control" >
 					                      	<option value="1">任务</option>
@@ -124,15 +124,31 @@
 					                   	${jobsVOsHTML }
 					                   <div class="form-group">
 					                      <label for="">节点序号</label>
-					                      <input type="number" class="form-control" name="sort" placeholder="节点序号">
+					                      <input type="number" class="form-control" name="sort" placeholder="节点序号" value="">
 					                    </div>
-					                   <div class="form-group">
+					                   <div class="form-group" id="nextSortDiv">
 					                      <label for="">下一个节点序号</label>
-					                      <input type="number" class="form-control" name="nextSort" placeholder="节点序号">
+					                      <input type="number" class="form-control" name="nextSort" placeholder="下一个节点序号">
+					                      
 					                    </div>
-					                    <div class="form-group">
+					                    <div class="box-body" id="flowTestDiv" hidden="true">
 					                      <label for="">判断规则</label>
-					                      <input type="text" class="form-control" name="flowTest" placeholder="判断规则">
+					                      <div class="row">
+						                     	<small class="label label-danger" name="add">+</small>
+					                      		<input type="text" class="col-xs-2 compare" name="sort" placeholder="下一个节点序号" value="">
+					                      		<vv >
+					                      		<input type="text" class="col-xs-2 compareArray" name="name" placeholder="josnname">
+					                      		<select name="type"  class="col-xs-1 compareArray" >
+							                      	<option value="-2"><=</option>
+							                      	<option value="-1"><</option>
+							                      	<option value="0">=</option>
+							                      	<option value="1">></option>
+							                      	<option value="2">>=</option>
+					                      		</select>
+					                      		<input type="text" class="col-xs-3 compareArray" name="value" placeholder="值" value="">
+					                      		<small class="label label-danger" name="subtract">-</small>
+					                      		</vv>
+					                      </div>
 					                    </div>	
 					                    <div class="form-group">
 					                      <label for="">节点描述</label>
@@ -141,7 +157,7 @@
 					                  </div><!-- /.box-body -->
 					
 					                  <div class="box-footer">
-					                    <button type="button" name="submit" class="btn btn-primary">保存</button>
+					                    <button type="button" name="sub" class="btn btn-primary">保存</button>
 					                  </div>
 					                </form>
 					              </div><!-- /.box -->
@@ -175,7 +191,102 @@
     <script src="http://static.workflow.com/dist/js/app.min.js" type="text/javascript"></script>
     <!-- page script -->
     <script type="text/javascript" src="/init.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			$("#nodeTypeDiv").on('change','select',function(){
+				var val = $(this).val();
+				switch(val){
+				case "1":
+					$("#nextSortDiv").show();
+					$("#flowTestDiv").hide();
+					$("#josIdDiv").show();
+					$("#flowTestDiv input").val("");
+					break;
+				case "2":
+					$("#nextSortDiv").hide();
+					$("#nextSortDiv input").val("");
+					$("#flowTestDiv").show();
+					$("#josIdDiv").hide();
+					break;
+				case "3":
+					$("#nextSortDiv").hide();
+					$("#nextSortDiv input").val("");
+					$("#flowTestDiv").hide();
+					$("#flowTestDiv input").val("");
+					$("#josIdDiv").hide();
+					break;
 
+				}
+			});
+			$("#flowTestDiv").on('click','small[name=subtract]',function(){
+				var row = $(this).parent();
+				row.remove();
+				
+			});
+			$("#flowTestDiv").on('click','small[name=add]',function(){
+				var row = $(this).parent();
+				$("#flowTestDiv").append("<div class=\"row\">"+row.html()+"</div>");
+			});
+			
+			$("form").on("click","button[name='sub']",function(){
+		  		var form = $(this).parent().parent();
+				var data = {};
+				var type = $("select[name='nodeTypeId']").val();
+				data["modelId"]=$("#modelId").val();
+				data["name"]=$("input[name='wfname']").val();
+				data["nodeTypeId"]=type;
+				data["sort"]=$("input[name='sort']").val();
+				var nextSort=$("input[name='nextSort']").val();
+				if(nextSort==''){
+					nextSort = 0;
+				}
+				data["nextSort"]=nextSort;
+				data["description"]=$("input[name='description']").val();
+				data["jobsId"]=$("select[name='jobsId']").val();
+				if(type=="2"||type==2){
+					var rows = $(".box-body").find(".row");
+					var compares = [];
+					$.each(rows,function(i,row){
+						var compare = {};
+						sort= $(this).find("input[name='sort']").val();
+						var div = $(this).find("vv");
+						var compareArrays = [];
+						div.each(function(){
+							var compareArray = {};
+							compareArray["name"]=$(this).find("input[name='name']").val();
+							compareArray["type"]=$(this).find("select[name='type']").val();
+							compareArray["value"]=$(this).find("input[name='value']").val();
+							console.log(compareArray);
+							compareArrays.push(compareArray);
+						});
+						
+						compare['compareArrays']=compareArrays;
+						compare['sort'] = sort;
+						compares.push(compare);
+					});
+					console.log(compares);
+					data['flowTest']=compares;
+				}
+	 			$.ajax({
+		             type: "POST",
+		             url: form.attr("action"),
+		             contentType: 'application/json',
+		             dataType: 'json',
+		             data: JSON.stringify(data),
+		             success: function(data){
+								if(data.isSuccess==1){
+									obj.attr("data-status",data.opStatus);
+									obj.text(data.opStatusName);
+									var td =obj.parent().parent().find("."+data.target);
+									td.text(data.statusName);
+								}
+		               		}
+			    
+		         });  
+			});
+		});
+	
+	</script>
 </body>
 </html>
 
