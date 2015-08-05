@@ -40,11 +40,15 @@
 	             dataType: 'json',
 	             data: JSON.stringify(data),
 	             success: function(data){
-							if(data.isSuccess==1){
-								obj.attr("data-status",data.opStatus);
-								obj.text(data.opStatusName);
-								var td =obj.parent().parent().find("."+data.target);
-								td.text(data.statusName);
+							if(data==1||data=="1"){
+								layer.msg("新增成功");
+								$("button[name='querySearch']").trigger("click");
+						          $("a[href='view']").tab('show');//显示当前选中的链接及关联的content 
+						          $("#add").removeClass("active");
+						          $("#view").addClass("active");
+						          $("form").find("input").val("");
+							}else{
+								layer.msg("新增失败");
 							}
 	               		}
 		    
@@ -62,6 +66,7 @@
 	             dataType: 'json',
 	             data: JSON.stringify(data),
 	             success: function(data){
+	            	 		layer.msg(data.msg);
 							if(data.isSuccess==1){
 								obj.attr("data-status",data.opStatus);
 								obj.text(data.opStatusName);

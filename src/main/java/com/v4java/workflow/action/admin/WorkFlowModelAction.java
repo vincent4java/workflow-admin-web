@@ -78,27 +78,6 @@ public class WorkFlowModelAction extends BaseAction{
 		
 		return bTables;
 	}
-	
-/*	@RequestMapping(value = "/findWorkFlowModelJson/{systemId}",method = RequestMethod.GET)
-	public @ResponseBody BTables<WorkFlowModelVO> findWorkFlowModelJson(@PathVariable Integer systemId){
-		BTables<WorkFlowModelVO> bTables = new BTables<WorkFlowModelVO>();
-		WorkFlowModelQuery workFlowModelQuery = new WorkFlowModelQuery();
-		workFlowModelQuery.setSystemId(systemId);
-		try {
-			List<WorkFlowModelVO> workFlowModels = workFlowModelService.findWorkFlowModel(workFlowModelQuery);
-			int count = workFlowModelService.findWorkFlowModelCount(workFlowModelQuery);
-			for (WorkFlowModelVO workFlowModelVO : workFlowModels) {
-				workFlowModelVO.setStatusName(AdminConst.STATUS_NAME[workFlowModelVO.getStatus()]);
-				workFlowModelVO.setCreateTimeName(DateUtil.datetimeToStr(workFlowModelVO.getCreateTime()));
-			}
-			bTables.setTotal(count);
-			bTables.setRows(workFlowModels);
-		} catch (Exception e) {
-			LOGGER.error("查询系统"+systemId+"工作流模板错误", e);
-		}
-		
-		return bTables;
-	}*/
 
 	@RequestMapping(value = "/insertWorkFlowModel",method = RequestMethod.POST)
 	public @ResponseBody int insertWorkFlowModel(@RequestBody WorkFlowModel workFlowModel){
@@ -125,6 +104,7 @@ public class WorkFlowModelAction extends BaseAction{
 		try {
 			int n  = workFlowModelService.updateWorkFlowModelStatus(workFlowModel);
 			updateStatus.setIsSuccess(n);
+			updateStatus.setMsg("更改工作流模板状态失败");
 			if (n==1) {
 				int x =workFlowModel.getStatus();
 				updateStatus.setTarget("status");
@@ -132,6 +112,7 @@ public class WorkFlowModelAction extends BaseAction{
 				updateStatus.setStatusName(AdminConst.STATUS_NAME[x]);
 				updateStatus.setOpStatus(AdminConst.OP_STATUS[x]);
 				updateStatus.setOpStatusName(AdminConst.OP_STATUS_NAME[x]);
+				updateStatus.setMsg("更改工作流模板状态成功");
 			}
 			updateStatus.setIsSuccess(n);
 		} catch (Exception e) {

@@ -150,6 +150,7 @@
     <!-- AdminLTE App -->
     <script src="http://static.workflow.com/dist/js/app.min.js" type="text/javascript"></script>
     <!-- page script -->
+	<script src="http://static.vacn.com/layer/layer.js"></script>
 	<script type="text/javascript" src="/init.js"></script>
 </body>
 </html>

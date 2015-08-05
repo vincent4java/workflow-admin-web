@@ -150,8 +150,10 @@
     <script src='http://static.workflow.com/plugins/fastclick/fastclick.min.js'></script>
     <!-- AdminLTE App -->
     <script src="http://static.workflow.com/dist/js/app.min.js" type="text/javascript"></script>
-    <script type="text/javascript" src="/init.js"></script>
+    
     <!-- page script -->
+    <script src="http://static.vacn.com/layer/layer.js"></script>
+    <script type="text/javascript" src="/init.js"></script>
 </body>
 </html>
 

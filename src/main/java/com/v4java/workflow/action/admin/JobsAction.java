@@ -105,6 +105,7 @@ public class JobsAction extends BaseAction{
 		try {
 			int n  = jobsService.updateJobsStatus(jobs);
 			updateStatus.setIsSuccess(n);
+			updateStatus.setMsg("更新岗位失败");
 			if (n==1) {
 				int x =jobs.getStatus();
 				updateStatus.setTarget("status");
@@ -112,12 +113,12 @@ public class JobsAction extends BaseAction{
 				updateStatus.setStatusName(AdminConst.STATUS_NAME[x]);
 				updateStatus.setOpStatus(AdminConst.OP_STATUS[x]);
 				updateStatus.setOpStatusName(AdminConst.OP_STATUS_NAME[x]);
+				updateStatus.setMsg("更新岗位成功");
 			}
 			updateStatus.setIsSuccess(n);
 		} catch (Exception e) {
 			LOGGER.error("更改岗位状态错误", e);
 		}
-		
 		return updateStatus;
 	}
 	

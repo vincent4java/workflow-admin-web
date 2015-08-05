@@ -21,6 +21,7 @@ public class UpdateStatus implements Serializable{
 
 	private Integer isSuccess;
 
+	private String msg ;
 	
 
 	public Integer getOpStatus() {
@@ -71,5 +72,14 @@ public class UpdateStatus implements Serializable{
 		this.isSuccess = isSuccess;
 	}
 
+	public String getMsg() {
+		return msg;
+	}
+
+	public void setMsg(String msg) {
+		this.msg = msg;
+	}
+	
+	
 	
 }
