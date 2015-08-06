@@ -41,10 +41,10 @@
                   <!-- Menu Footer-->
                   <li class="user-footer">
                     <div class="pull-left">
-                      <a href="#" class="btn btn-default btn-flat">修改信息</a>
+                      <a href="/info.do" class="btn btn-default btn-flat">修改信息</a>
                     </div>
                     <div class="pull-right">
-                      <a href="#" class="btn btn-default btn-flat">推出</a>
+                      <a href="/logout.do" class="btn btn-default btn-flat">登出</a>
                     </div>
                   </li>
                 </ul>

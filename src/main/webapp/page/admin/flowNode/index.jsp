@@ -42,8 +42,8 @@
 					<nav class="navbar navbar-default" role="navigation">
 					   <div>
 					      <ul class="nav navbar-nav">
-					         <li class="active"><a href="view">查看节点</a></li>
-					         <li><a href="add">新增节点</a></li>
+					         <li class="active"><a href="view" name="tab">查看节点</a></li>
+					         <li><a href="add" name="tab">新增节点</a></li>
 					      </ul>
 					   </div>
 					</nav>

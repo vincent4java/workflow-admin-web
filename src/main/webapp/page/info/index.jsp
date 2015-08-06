@@ -40,7 +40,7 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>
-            工作流模板管理
+            修改信息 
           </h1>
           <ol class="breadcrumb">
           </ol>
@@ -50,88 +50,39 @@
           <div class="row">
             <div class="col-xs-12">
               <div class="box">
-                <div class="box-header">
-					<nav class="navbar navbar-default" role="navigation">
-					   <div>
-					      <ul class="nav navbar-nav">
-					         <li class="active"><a href="view" name="tab">查看工作流模板</a></li>
-					         <li><a href="add" name="tab">新增工作流模板</a></li>
-					      </ul>
-					   </div>
-					</nav>
-                </div><!-- /.box-header -->
                 <div class="box-body">
-				 <div class="tab-content"> 
-					<div class="tab-pane active" id="view">				
-					<div id="custom-toolbar">
-					    <div class="form-inline" role="form">
-					        <div class="form-group">
-					            <div class="input-group">
-					                <input class="form-control" type="text" placeholder="名称" name="name">
-					            </div>
-					        </div>
-					        <div class="form-group">
-					            <div class="input-group">
-					                <input class="form-control" type="date" placeholder="创建时间(开始)" name="createTimeStart">
-					            </div>
-					        	<div class="input-group">
-					                <input class="form-control" type="date" placeholder="创建时间(结束)" name="createTimeEnd">
-					            </div>
-					        </div>
-					        <button type="submit" class="btn btn-default" name="querySearch">搜索</button>
-					    </div>
-					</div>
-					<table id="data-table" data-url="findWorkFlowModelJson.do" data-height="555" data-method="post" data-show-refresh="true" 
-					data-side-pagination="server" data-pagination="true" data-page-list="[10, 20, 50]" data-search="false">
-						   <thead>
-						    <tr>
-					        <th data-field="name" data-align="center" >名称</th>
-					        <th data-field="busyTypeId" data-align="center" >类型id</th>
-					        <th data-field="description" data-align="center" >描述</th>
-					        <th data-field="statusName" data-align="center" class="col-md-1 status">是否可用</th>
-					        <th data-field="createTimeName" data-align="center" >创建时间</th>
-					        <th data-field="updateTimeName" data-align="center" >最近修改时间</th>
-					        <th data-field="operation" data-align="center" class="col-md-2">操作</th>
-   						 	</tr>	
-   						 	</thead>
-					</table>
-					</div>
-						              <!--view  -->
-	              <div class="tab-pane" id="add">
+                	<div class="tab-content"> 
+
+	              <!--view  -->
 	             		<div class="col-md-6">
               			<!-- general form elements -->
 			              <div class="box box-primary">
 			                <div class="box-header">
-			                  <h3 class="box-title">新增工作流模板</h3>
+			                  <h3 class="box-title"></h3>
 			                </div><!-- /.box-header -->
 			                <!-- form start -->
-			                <form role="form" action="/workFlowModel/insertWorkFlowModel.do" method="post">
+			                <form role="form" action="/changeInfo.do" method="post">
 			                  <div class="box-body">
 			                    <div class="form-group">
-			                      <label for="">工作流模板名称</label>
-			                      <input type="text" class="form-control" name="name" placeholder="工作流模板名称">
+			                      <label for="">原来密码</label>
+			                      <input type="text" class="form-control" name="oldPwd" placeholder="原来密码">
 			                    </div>
 			                    <div class="form-group">
-			                      <label for="">工作流模板描述</label>
-			                      <input type="text" class="form-control" name="description" placeholder="工作流模板描述">
-			                    </div>
-			                    <div class="form-group">
-			                      <label for="">类型id</label>
-			                      <input type="number" class="form-control" name="busyTypeId" placeholder="工作流模板描述">
+			                      <label for="">新密码</label>
+			                      <input type="text" class="form-control" name="nowPwd" placeholder="新密码">
 			                    </div>
 			                  </div><!-- /.box-body -->
 			
 			                  <div class="box-footer">
-			                    <button type="button" name="submit" class="btn btn-primary">保存</button>
+			                    <button type="button" name="update_submit" class="btn btn-primary">保存</button>
 			                  </div>
 			                </form>
 			              </div><!-- /.box -->
               
 	            	</div>
-	              </div>
-					</div>
                 </div><!-- /.box-body -->
               </div><!-- /.box -->
+              </div> <!-- tab -->
             </div><!-- /.col -->
           </div><!-- /.row -->
         </section><!-- /.content -->
@@ -155,9 +106,8 @@
     <!-- AdminLTE App -->
     <script src="http://static.workflow.com/dist/js/app.min.js" type="text/javascript"></script>
     <!-- page script -->
-    <script src="http://static.vacn.com/layer/layer.js"></script>
+	<script src="http://static.vacn.com/layer/layer.js"></script>
 	<script type="text/javascript" src="/init.js"></script>
-
 </body>
 </html>
 

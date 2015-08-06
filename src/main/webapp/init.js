@@ -2,7 +2,7 @@
  * 
  */
     $(function () {
-        $('.navbar a').click(function (e) { 
+        $('a[name="tab"]').click(function (e) { 
 	          e.preventDefault();//阻止a链接的跳转行为 
 	          $(this).tab('show');//显示当前选中的链接及关联的content 
 	          $(".tab-content div").removeClass("active");
@@ -50,6 +50,34 @@
 							}else{
 								layer.msg("新增失败");
 							}
+	               		}
+		    
+	         });  
+    	});
+    	
+    	$("form").on("click","button[name='update_submit']",function(){
+    		var form = $(this).parent().parent();
+			var data = {};
+			form.find("input").each(function(){
+				var val = $(this).val();
+				if(val!=''){
+					data[$(this).attr("name")]=$(this).val();
+				}
+			});
+			form.find("select").each(function(){
+				var val = $(this).val();
+				if(val!=''){
+					data[$(this).attr("name")]=$(this).val();
+				}
+			});
+ 			$.ajax({
+	             type: "POST",
+	             url: form.attr("action"),
+	             contentType: 'application/json',
+	             dataType: 'json',
+	             data: JSON.stringify(data),
+	             success: function(data){
+	            	 layer.msg(data);
 	               		}
 		    
 	         });  
