@@ -128,7 +128,6 @@ $(function(){
    <!-- 学生登录结束-->
   </div>
 </div>
-<div class="bottom">©2014 Leting <a href="javascript:;" target="_blank">关于</a> <span>京ICP证030173号</span><img width="13" height="16" src="./login/copy_rignt_24.png"></div>
 <div class="screenbg">
   <ul> 
     <li style="opacity: 0; visibility: visible;"><a href="javascript:;"><img src="./login/0.jpg" style="width: 1351px;"></a></li>

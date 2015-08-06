@@ -1,17 +1,17 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-    <parent>
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
 		<groupId>com.v4java</groupId>
 		<artifactId>workflow</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 		<relativePath>../workflow</relativePath>
 	</parent>
-  <artifactId>workflow-admin-web</artifactId>
-  <packaging>war</packaging>
-  <name>workflow-admin-web Maven Webapp</name>
+	<artifactId>workflow-admin-web</artifactId>
+	<packaging>war</packaging>
+	<name>workflow-admin-web Maven Webapp</name>
 
-	
+
 	<dependencies>
 		<!-- 工具包 -->
 		<dependency>
@@ -26,13 +26,17 @@
 			<groupId>com.vincent</groupId>
 			<artifactId>v4java-utils</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>com.v4java</groupId>
+			<artifactId>workflow-redis</artifactId>
+		</dependency>
 		<!-- -->
 
 		<dependency>
 			<groupId>com.v4java</groupId>
 			<artifactId>workflow-service</artifactId>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
@@ -56,11 +60,11 @@
 		</dependency>
 		<!-- -->
 		<dependency>
-		  <groupId>dom4j</groupId>
-		  <artifactId>dom4j</artifactId>
-		  <version>1.6.1</version>
+			<groupId>dom4j</groupId>
+			<artifactId>dom4j</artifactId>
+			<version>1.6.1</version>
 		</dependency>
-	 </dependencies>
+	</dependencies>
 	<build>
 		<finalName>workflow-admin-web</finalName>
 		<plugins>
@@ -115,7 +119,7 @@
 		</plugins>
 		<sourceDirectory>src/main/java</sourceDirectory>
 		<outputDirectory>target/workflow-admin-web/lib/classes</outputDirectory>
-	</build> 
- 
- 
+	</build>
+
+
 </project>
