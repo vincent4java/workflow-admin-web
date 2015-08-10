@@ -140,5 +140,25 @@
     </div><!-- ./wrapper -->
 
 </body>
+<!-- jQuery 2.1.4 -->
+<script src="http://static.workflow.com/plugins/jQuery/jQuery-2.1.4.min.js"></script>
+<!-- Bootstrap 3.3.2 JS -->
+<script src="http://static.workflow.com/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+<!-- DATA TABES SCRIPT -->
+<script src="http://static.workflow.com/bootstrap-table/bootstrap-table.js"></script>
+<script src="http://static.workflow.com/bootstrap-table/locale/bootstrap-table-zh-CN.js"></script>
+<!-- datetimepicker -->
+<script src="http://static.workflow.com/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+<script src="http://static.workflow.com/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+<!-- SlimScroll -->
+<script src="http://static.workflow.com/plugins/slimScroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+<!-- FastClick -->
+<script src='http://static.workflow.com/plugins/fastclick/fastclick.min.js'></script>
+<!-- AdminLTE App -->
+<script src="http://static.workflow.com/dist/js/app.min.js" type="text/javascript"></script>
+<!-- page script -->
+<script type="text/javascript" src="/init.js"></script>
+<script src="http://static.vacn.com/layer/layer.js"></script>
+
 </html>
 

@@ -22,6 +22,7 @@ import com.v4java.workflow.query.admin.JobsQuery;
 import com.v4java.workflow.service.admin.IFlowNodeService;
 import com.v4java.workflow.service.admin.IJobsService;
 import com.v4java.workflow.vo.BTables;
+import com.v4java.workflow.vo.UpdateStatus;
 import com.v4java.workflow.vo.admin.FlowNodeVO;
 import com.v4java.workflow.vo.admin.JobsVO;
 
@@ -92,7 +93,7 @@ public class FlowNodeAction extends BaseAction {
 				op.append("data-status=\"");
 				op.append(AdminConst.OP_STATUS[flowNodeVO.getStatus()]);
 				op.append("\" ");
-				op.append("type=\"button\" op-url=\"updateJobsnStatus.do\" class=\"btn btn-warning btn-flat\">");
+				op.append("type=\"button\" op-url=\"/flowNode/updateFlowNodeStatus.do\" class=\"btn btn-warning btn-flat\">");
 				op.append(AdminConst.OP_STATUS_NAME[flowNodeVO.getStatus()]);
 				op.append("</button>");
 				flowNodeVO.setOperation(op.toString());
@@ -110,6 +111,15 @@ public class FlowNodeAction extends BaseAction {
 	public @ResponseBody int insertFlowNode(@RequestBody FlowNode flowNode ){
 		flowNode.setStatus(AdminConst.STATUS_TRUE);
 		flowNode.setNodeType(flowNode.getNodeTypeId());
+		if (flowNode.getNodeType()==FlowConst.NODE_TYPE_START) {
+			flowNode.setJobsId(0);
+			flowNode.setSort(0);
+			flowNode.setNextSort(1);
+		}else {
+			if (flowNode.getSort()==0) {
+				flowNode.setSort(null);
+			}
+		}
 		if (flowNode.getNodeType()!=FlowConst.NODE_TYPE_TASK) {
 			flowNode.setJobsId(0);
 		}
@@ -122,4 +132,32 @@ public class FlowNodeAction extends BaseAction {
 		return n;
 	}
 	
+	
+	
+	/**
+	 * 更改岗位状态
+	 * @return
+	 */
+	@RequestMapping(value = "/updateFlowNodeStatus",method = RequestMethod.POST)
+	public @ResponseBody UpdateStatus updateFlowNodeStatus(@RequestBody FlowNode flowNode){
+		UpdateStatus updateStatus = new UpdateStatus();
+		try {
+			int n  = flowNodeService.updateFlowNodeStatus(flowNode);
+			updateStatus.setIsSuccess(n);
+			updateStatus.setMsg("更新岗位失败：当前结点正在使用");
+			if (n==1) {
+				int x =flowNode.getStatus();
+				updateStatus.setTarget("status");
+				updateStatus.setStatus(x);
+				updateStatus.setStatusName(AdminConst.STATUS_NAME[x]);
+				updateStatus.setOpStatus(AdminConst.OP_STATUS[x]);
+				updateStatus.setOpStatusName(AdminConst.OP_STATUS_NAME[x]);
+				updateStatus.setMsg("更新岗位成功");
+			}
+			updateStatus.setIsSuccess(n);
+		} catch (Exception e) {
+			LOGGER.error("更改岗位状态错误", e);
+		}
+		return updateStatus;
+	}
 }

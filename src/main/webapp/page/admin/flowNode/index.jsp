@@ -116,6 +116,7 @@
 					                  <div class="form-group" id="nodeTypeDiv">
 					                      <label for="">节点类型</label>
 					                      <select name="nodeTypeId" class="form-control" >
+					                      	<option value="0">开始</option>
 					                      	<option value="1">任务</option>
 					                      	<option value="2">判断</option>
 					                      	<option value="3">结束</option>
@@ -173,11 +174,36 @@
       </div><!-- /.content-wrapper -->
 		<jsp:include page="/footer.jsp"></jsp:include>
     </div><!-- ./wrapper -->
+    <!-- jQuery 2.1.4 -->
+<script src="http://static.workflow.com/plugins/jQuery/jQuery-2.1.4.min.js"></script>
+<!-- Bootstrap 3.3.2 JS -->
+<script src="http://static.workflow.com/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+<!-- DATA TABES SCRIPT -->
+<script src="http://static.workflow.com/bootstrap-table/bootstrap-table.js"></script>
+<script src="http://static.workflow.com/bootstrap-table/locale/bootstrap-table-zh-CN.js"></script>
+<!-- datetimepicker -->
+<script src="http://static.workflow.com/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+<script src="http://static.workflow.com/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+<!-- SlimScroll -->
+<script src="http://static.workflow.com/plugins/slimScroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+<!-- FastClick -->
+<script src='http://static.workflow.com/plugins/fastclick/fastclick.min.js'></script>
+<!-- AdminLTE App -->
+<script src="http://static.workflow.com/dist/js/app.min.js" type="text/javascript"></script>
+<!-- page script -->
+<script type="text/javascript" src="/init.js"></script>
+<script src="http://static.vacn.com/layer/layer.js"></script>
 	<script type="text/javascript">
 		$(function(){
 			$("#nodeTypeDiv").on('change','select',function(){
 				var val = $(this).val();
 				switch(val){
+				case "0":
+					$("#nextSortDiv").show();
+					$("#flowTestDiv").hide();
+					$("#josIdDiv").hide();
+					$("#flowTestDiv input").val("");
+					break;
 				case "1":
 					$("#nextSortDiv").show();
 					$("#flowTestDiv").hide();
@@ -273,5 +299,7 @@
 	
 	</script>
 </body>
+
+	   
 </html>
 

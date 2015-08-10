@@ -46,7 +46,7 @@
 						          $("a[href='view']").tab('show');//显示当前选中的链接及关联的content 
 						          $("#add").removeClass("active");
 						          $("#view").addClass("active");
-						          $("form").find("input").val("");
+						          $("form").find("input[type='text']").val("");
 							}else{
 								layer.msg("新增失败");
 							}
