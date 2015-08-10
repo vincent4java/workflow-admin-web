@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.v4java.enumerate.MD5Utils;
 import com.v4java.workflow.common.BaseAction;
+import com.v4java.workflow.constant.AdminConst;
 import com.v4java.workflow.constant.LoginMsgConst;
 import com.v4java.workflow.constant.SessionConst;
 import com.v4java.workflow.pojo.Xf9System;
@@ -52,12 +53,16 @@ public class LoginAction extends BaseAction {
 				
 				if (xf9System!=null) {
 					if (xf9System.getUserPwd().equals(MD5Utils.md5SaltMd5(userPwd, xf9System.getUserCode()))) {
-						loginMsg.setFlag(true);
-						loginMsg.setFailCount(0);
-						loginMsg.setMsg(LoginMsgConst.ACCOUNT_SUCCESS);
-						xf9System.setUserPwd(null);
-						session.setAttribute(SessionConst.ADMIN_USER, xf9System);
-						session.setAttribute(SessionConst.SYSTEM_ID, xf9System.getId());
+						if (xf9System.getStatus()==AdminConst.STATUS_TRUE) {
+							loginMsg.setFlag(true);
+							loginMsg.setFailCount(0);
+							loginMsg.setMsg(LoginMsgConst.ACCOUNT_SUCCESS);
+							xf9System.setUserPwd(null);
+							session.setAttribute(SessionConst.ADMIN_USER, xf9System);
+							session.setAttribute(SessionConst.SYSTEM_ID, xf9System.getId());
+						}else {
+							loginMsg.setMsg(LoginMsgConst.ACCOUNT_STATUS_FALSE);
+						}
 					}else {
 						loginMsg.setMsg(LoginMsgConst.PWD_ERROR);
 					}

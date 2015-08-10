@@ -27,7 +27,6 @@
 
 	<!-- 拦截器 -->
 	<bean id="loginInterceptor" class="com.v4java.workflow.interceptor.LoginInterceptor"/>
-	<bean id="permissionInterceptor" class="com.v4java.workflow.interceptor.PermissionInterceptor"/>
 	<!-- 拦截器 -->
 
 
@@ -40,8 +39,6 @@
 		<property name="interceptors">
 			<list>
 				<ref bean="loginInterceptor" />
-				<ref bean="permissionInterceptor"/>
-				
 			</list>
 		</property>
 	</bean>

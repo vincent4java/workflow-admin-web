@@ -12,5 +12,6 @@ public class LoginMsgConst {
 	
 	public final static String ACCOUNT_FREEZE ="账户被冻结，请联系管理员";
 	
+	public final static String ACCOUNT_STATUS_FALSE ="当前系统已被禁用";
 	
 }

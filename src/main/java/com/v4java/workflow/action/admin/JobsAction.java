@@ -33,7 +33,7 @@ public class JobsAction extends BaseAction{
 	
 	
 	@RequestMapping(value = "/findJobs",method = RequestMethod.GET)
-	public String findAdminUser(){
+	public String findJobs(){
 		return "page/admin/jobs/index";
 		
 	}
@@ -54,7 +54,7 @@ public class JobsAction extends BaseAction{
 	
 	
 	@RequestMapping(value = "/findJobsJson",method = RequestMethod.POST)
-	public @ResponseBody BTables<JobsVO> findAdminUserJson(@RequestBody JobsQuery jobsQuery){
+	public @ResponseBody BTables<JobsVO> findJobsJson(@RequestBody JobsQuery jobsQuery){
 		BTables<JobsVO> bTables = new BTables<JobsVO>();
 		List<JobsVO> jobsVOs = null;
 		jobsQuery.setSystemId(getSystemId());

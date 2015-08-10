@@ -37,7 +37,7 @@ public class JobsUserAction extends BaseAction{
 	
 	
 	@RequestMapping(value = "/findJobsUser/{jobsId}",method = RequestMethod.GET)
-	public String findAdminUser(@PathVariable Integer jobsId){
+	public String findJobsUser(@PathVariable Integer jobsId){
 		request.setAttribute("jobsId", jobsId);
 		return "page/admin/jobsUser/index";
 		
@@ -45,7 +45,7 @@ public class JobsUserAction extends BaseAction{
 	
 	
 	@RequestMapping(value = "/findJobsUserVOJson",method = RequestMethod.POST)
-	public @ResponseBody BTables<JobsUserVO> JobsUserVOJson(@RequestBody JobsUserQuery jobsUserQuery){
+	public @ResponseBody BTables<JobsUserVO> findJobsUserVOJson(@RequestBody JobsUserQuery jobsUserQuery){
 		BTables<JobsUserVO> bTables = new BTables<JobsUserVO>();
 		jobsUserQuery.setSystemId(getSystemId());
 		try {
