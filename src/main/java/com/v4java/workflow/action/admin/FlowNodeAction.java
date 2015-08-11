@@ -12,10 +12,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.alibaba.fastjson.JSON;
 import com.v4java.utils.DateUtil;
 import com.v4java.workflow.common.BaseAction;
 import com.v4java.workflow.constant.AdminConst;
 import com.v4java.workflow.constant.FlowConst;
+import com.v4java.workflow.pojo.Compare;
+import com.v4java.workflow.pojo.CompareArray;
 import com.v4java.workflow.pojo.FlowNode;
 import com.v4java.workflow.query.admin.FlowNodeQuery;
 import com.v4java.workflow.query.admin.JobsQuery;
@@ -40,6 +43,86 @@ public class FlowNodeAction extends BaseAction {
 	@Autowired
 	private IJobsService jobsService;
 	
+	
+	
+	@RequestMapping(value = "/findFlowNodeById/{id}",method = RequestMethod.GET)
+	public String findFlowNodeById(@PathVariable Integer id){
+		JobsQuery jobsQuery = new JobsQuery();
+		jobsQuery.setSystemId(getSystemId());
+		try {
+			List<JobsVO> jobsVOs = jobsService.findJobsBySystemId(jobsQuery);
+			FlowNode flowNode = flowNodeService.findFlowNodeById(id);
+			StringBuffer html = new StringBuffer();
+			html.append("<div class=\"form-group\" id=\"jobsIdDiv\" hidden=\"hidden\">");
+			html.append("<label for=\"\">岗位</label>");
+			html.append("<select name=\"jobsId\" class=\"form-control\" ");
+			html.append("org-val=\"");
+			html.append(flowNode.getJobsId());
+			html.append("\" ");
+			html.append(" >");
+ 			for (JobsVO jobsVO : jobsVOs) {
+				html.append("<option value=\"");
+				html.append(jobsVO.getId());
+				html.append("\">");
+				html.append(jobsVO.getName());
+				html.append("</option>");
+			}
+ 			html.append("<option value=\"0\">无</option>");
+			html.append("</select>");
+			html.append("</div>");
+			StringBuffer testHtml = new StringBuffer();
+			if (flowNode.getNodeType()==FlowConst.NODE_TYPE_IF) {
+				String[] sign = {"<=","<","=",">",">="}; 
+				List<Compare> compares = JSON.parseArray(flowNode.getFlowTest(),Compare.class);
+				for (Compare compare : compares) {
+					CompareArray[] arrays=compare.getCompareArrays();
+					testHtml.append("<div class=\"row\"> ");
+					testHtml.append("<small class=\"label label-danger\" name=\"add\">+</small> ");
+					testHtml.append("<input type=\"text\" class=\"col-xs-2 compare\" name=\"sort\" placeholder=\"下一个节点序号\" value=\"");
+					testHtml.append(compare.getSort());
+					testHtml.append("\"> ");
+					for (CompareArray compareArray : arrays) {
+						testHtml.append("<vv > ");
+						testHtml.append("<input type=\"text\" class=\"col-xs-2 compareArray\" name=\"name\"  value=\"");
+						testHtml.append(compareArray.getName());
+						testHtml.append("\" placeholder=\"josnname\"> ");
+						testHtml.append("<select name=\"type\"  class=\"col-xs-1 compareArray\" > ");
+						testHtml.append("<option value=\"-2\"><=</option> ");
+						testHtml.append("<option value=\"-1\"><</option> ");
+						testHtml.append("<option value=\"0\">=</option> ");
+						testHtml.append("<option value=\"1\">></option> ");
+						testHtml.append("<option value=\"2\">>=</option> ");
+						for (int i = -2; i <=2; i++) {
+							testHtml.append("<option value=\"");
+							testHtml.append(i);
+							testHtml.append("\"");
+							if (i==compareArray.getType()) {
+								testHtml.append("selected = \"selected\"");
+							}
+							testHtml.append( ">");
+							testHtml.append(sign[i+2]);
+							testHtml.append("</option> ");
+						}
+						testHtml.append("</select> ");
+						testHtml.append("<input type=\"text\" class=\"col-xs-3 compareArray\" name=\"value\" placeholder=\"值\" value=\"");
+						testHtml.append(compareArray.getValue());
+						testHtml.append("\"> ");
+						testHtml.append("<small class=\"label label-danger\" name=\"subtract\">-</small> ");
+						testHtml.append("</vv> ");
+					}
+					testHtml.append("</div>");
+				}
+			}
+			request.setAttribute("testHtml", testHtml.toString());
+			request.setAttribute("jobsVOsHTML", html.toString());
+			request.setAttribute("flowNode",flowNode);
+		} catch (Exception e) {
+			LOGGER.error( e);
+		}
+		return "page/admin/flowNode/update";
+		
+	}
+	
 	@RequestMapping(value = "/findFlowNode/{modelId}",method = RequestMethod.GET)
 	public String findFlowNode(@PathVariable Integer modelId){
 		request.setAttribute("modelId", modelId);
@@ -48,7 +131,7 @@ public class FlowNodeAction extends BaseAction {
 		try {
 			List<JobsVO> jobsVOs = jobsService.findJobsBySystemId(jobsQuery);
 			StringBuffer html = new StringBuffer();
-			html.append("<div class=\"form-group\" id=\"josIdDiv\">");
+			html.append("<div class=\"form-group\" id=\"jobsIdDiv\">");
 			html.append("<label for=\"\">岗位</label>");
 			html.append("<select name=\"jobsId\" class=\"form-control\" >");
  			for (JobsVO jobsVO : jobsVOs) {
@@ -96,6 +179,10 @@ public class FlowNodeAction extends BaseAction {
 				op.append("type=\"button\" op-url=\"/flowNode/updateFlowNodeStatus.do\" class=\"btn btn-warning btn-flat\">");
 				op.append(AdminConst.OP_STATUS_NAME[flowNodeVO.getStatus()]);
 				op.append("</button>");
+				op.append("<a href=\"/flowNode/findFlowNodeById/");
+				op.append(flowNodeVO.getId());
+				op.append(".do\" class=\"btn btn-warning btn-flat\">修改");
+				op.append("</a>");
 				flowNodeVO.setOperation(op.toString());
 				op = null;
 			}

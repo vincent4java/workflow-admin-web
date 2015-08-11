@@ -93,7 +93,7 @@
 					        <th data-field="statusName" data-align="center" class="col-md-1 status">是否可用</th>
 					        <th data-field="createTimeName" data-align="center" >创建时间</th>
 					        <th data-field="updateTimeName" data-align="center" >最近修改时间</th>
-					        <th data-field="operation" data-align="center" class="col-md-2">操作</th>
+					        <th data-field="operation" data-align="center" class="col-md-1">操作</th>
    						 	</tr>	
    						 	</thead>
 					</table>
@@ -110,7 +110,7 @@
 					                  <div class="box-body">
 					                    <div class="form-group">
 					                      <label for="">节点名称</label>
-					                      <input type="hidden" id="modelId" name="modelId" value="${modelId }">
+					                      <input type="hidden" id="modelId" name="modelId" value="${modelId }" >
 					                      <input type="text" class="form-control" name="wfname" placeholder="节点名称" value="">
 					                    </div>
 					                  <div class="form-group" id="nodeTypeDiv">
@@ -123,11 +123,11 @@
 					                      </select>
 					                    </div>
 					                   	${jobsVOsHTML }
-					                   <div class="form-group">
+					                   <div class="form-group" id="sortDiv" hidden="true">
 					                      <label for="">节点序号</label>
-					                      <input type="number" class="form-control" name="sort" placeholder="节点序号" value="">
+					                      <input type="number" class="form-control" name="sort" placeholder="节点序号" value="" >
 					                    </div>
-					                   <div class="form-group" id="nextSortDiv">
+					                   <div class="form-group" id="nextSortDiv" >
 					                      <label for="">下一个节点序号</label>
 					                      <input type="number" class="form-control" name="nextSort" placeholder="下一个节点序号">
 					                      
@@ -191,39 +191,46 @@
 <!-- AdminLTE App -->
 <script src="http://static.workflow.com/dist/js/app.min.js" type="text/javascript"></script>
 <!-- page script -->
-<script type="text/javascript" src="/init.js"></script>
 <script src="http://static.vacn.com/layer/layer.js"></script>
+<script src="http://static.workflow.com/cool/jquery.particleground.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="/init.js"></script>
+
 	<script type="text/javascript">
 		$(function(){
+			$("#jobsIdDiv").hide();
 			$("#nodeTypeDiv").on('change','select',function(){
 				var val = $(this).val();
 				switch(val){
 				case "0":
 					$("#nextSortDiv").show();
 					$("#flowTestDiv").hide();
-					$("#josIdDiv").hide();
+					$("#jobsIdDiv").hide();
+					$("#sortDiv").hide();
 					$("#flowTestDiv input").val("");
 					break;
 				case "1":
+					$("#sortDiv").show();
+					$("#josIdDiv").show();
 					$("#nextSortDiv").show();
 					$("#flowTestDiv").hide();
-					$("#josIdDiv").show();
+					$("#jobsIdDiv").show();
 					$("#flowTestDiv input").val("");
 					break;
 				case "2":
+					$("#sortDiv").show();
 					$("#nextSortDiv").hide();
 					$("#nextSortDiv input").val("");
 					$("#flowTestDiv").show();
 					$("#josIdDiv").hide();
 					break;
 				case "3":
+					$("#sortDiv").show();
 					$("#nextSortDiv").hide();
 					$("#nextSortDiv input").val("");
 					$("#flowTestDiv").hide();
 					$("#flowTestDiv input").val("");
 					$("#josIdDiv").hide();
 					break;
-
 				}
 			});
 			$("#flowTestDiv").on('click','small[name=subtract]',function(){
@@ -288,7 +295,11 @@
 						          $("a[href='view']").tab('show');//显示当前选中的链接及关联的content 
 						          $("#add").removeClass("active");
 						          $("#view").addClass("active");
-						          $("form").find("input").val("");
+						          $("form").find("input").each(function(){
+						        	  if($(this).attr("name")=="modelId"){
+						        		  $(this).val("");
+						        	  }
+						          });
 							}else{
 								layer.msg("新增失败");
 							}

@@ -17,11 +17,13 @@ import com.alibaba.fastjson.JSON;
 import com.v4java.utils.DateUtil;
 import com.v4java.workflow.common.BaseAction;
 import com.v4java.workflow.constant.AdminConst;
+import com.v4java.workflow.pojo.Jobs;
 import com.v4java.workflow.pojo.JobsUser;
 import com.v4java.workflow.query.admin.JobsUserQuery;
 import com.v4java.workflow.redis.util.JedisUtil;
 import com.v4java.workflow.service.admin.IJobsUserService;
 import com.v4java.workflow.vo.BTables;
+import com.v4java.workflow.vo.UpdateStatus;
 import com.v4java.workflow.vo.admin.JobsUserVO;
 import com.v4java.workflow.vo.admin.UserVO;
 
@@ -67,9 +69,13 @@ public class JobsUserAction extends BaseAction{
 				op.append("data-status=\"");
 				op.append(AdminConst.OP_STATUS[jobsUserVO.getStatus()]);
 				op.append("\" ");
-				op.append("type=\"button\" op-url=\"updateJobsnStatus.do\" class=\"btn btn-warning btn-flat\">");
+				op.append("type=\"button\" op-url=\"/jobsUser/updateJobsUserStatus.do\" class=\"btn btn-warning btn-flat\">");
 				op.append(AdminConst.OP_STATUS_NAME[jobsUserVO.getStatus()]);
 				op.append("</button>");
+				op.append("</button>");
+				op.append("<button name=\"update\" data-id=\"");
+				op.append(jobsUserVO.getId());
+				op.append("\" op-url=\"/jobsUser/updateJobsUser.do\" class=\"btn btn-warning btn-flat\">修改");
 				jobsUserVO.setOperation(op.toString());
 				op = null;
 			}
@@ -77,7 +83,7 @@ public class JobsUserAction extends BaseAction{
 			bTables.setRows(jobsVOs);
 			bTables.setTotal(count);
 		} catch (Exception e) {
-			LOGGER.error("查询id为"+getSystemId()+"系统的岗位对应用户", e);
+			LOGGER.error("查询id为"+getSystemId()+"系统的岗位人员关系对应用户", e);
 		}
 		return bTables;
 		
@@ -114,11 +120,60 @@ public class JobsUserAction extends BaseAction{
 				JedisUtil.getInstance().set(getXf9System().getSystemCode()+":"+userVO.getUserCode(), JSON.toJSONString(userVO));
 			}
 		} catch (Exception e) {
-			LOGGER.error("添加岗位失败", e);
+			LOGGER.error("添加岗位人员关系失败", e);
 		}
 		return n;
 		
 	}
 	
 	
+	/**
+	 * 更改岗位人员关系状态
+	 * @return
+	 */
+	@RequestMapping(value = "/updateJobsUserStatus",method = RequestMethod.POST)
+	public @ResponseBody UpdateStatus updateJobsUserStatus(@RequestBody JobsUser jobsUser){
+		UpdateStatus updateStatus = new UpdateStatus();
+		try {
+			int n  = jobsUserService.updateJobsUserStatus(jobsUser);
+			updateStatus.setIsSuccess(n);
+			updateStatus.setMsg("更新岗位人员关系状态失败");
+			if (n==1) {
+				int x =jobsUser.getStatus();
+				updateStatus.setTarget("status");
+				updateStatus.setStatus(x);
+				updateStatus.setStatusName(AdminConst.STATUS_NAME[x]);
+				updateStatus.setOpStatus(AdminConst.OP_STATUS[x]);
+				updateStatus.setOpStatusName(AdminConst.OP_STATUS_NAME[x]);
+				updateStatus.setMsg("更新岗位人员关系状态成功");
+			}
+			updateStatus.setIsSuccess(n);
+		} catch (Exception e) {
+			LOGGER.error("更改岗位人员关系状态错误", e);
+		}
+		return updateStatus;
+	}
+	
+	
+	
+	/**
+	 * 更改岗位人员关系状态
+	 * @return
+	 */
+	@RequestMapping(value = "/updateJobsUser",method = RequestMethod.POST)
+	public @ResponseBody UpdateStatus updateJobsUser(@RequestBody JobsUser jobsUser){
+		UpdateStatus updateStatus = new UpdateStatus();
+		try {
+			int n  = jobsUserService.updateJobsUser(jobsUser);
+			updateStatus.setIsSuccess(n);
+			updateStatus.setMsg("更新岗位人员关系失败");
+			if (n==1) {
+				updateStatus.setMsg("更新岗位人员关系成功");
+			}
+			updateStatus.setIsSuccess(n);
+		} catch (Exception e) {
+			LOGGER.error("更改岗位人员关系状态错误", e);
+		}
+		return updateStatus;
+	}
 }

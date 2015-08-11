@@ -40,7 +40,7 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>
-             岗位与人员与人员与人员
+             岗位与人员关系
           </h1>
           <ol class="breadcrumb">
           </ol>
@@ -86,8 +86,8 @@
 					data-side-pagination="server" data-pagination="true" data-page-list="[10, 20, 50]" data-search="false">
 						   <thead>
 						    <tr>
-						    <th data-field="userCode" data-align="center" >人员Code</th>
-					        <th data-field="userName" data-align="center" >人员名称</th>
+						    <th data-field="userCode" data-align="center" class="data-input">人员Code</th>
+					        <th data-field="userName" data-align="center" class="data-input">人员名称</th>
 					        <th data-field="statusName" data-align="center" class="col-md-1 status">是否可用</th>
 					        <th data-field="createTimeName" data-align="center" >创建时间</th>
 					        <th data-field="updateTimeName" data-align="center" >最近修改时间</th>
@@ -109,11 +109,11 @@
 			                    <div class="form-group">
 			                      <label for="">岗位与人员code</label>
 			                      <input type="hidden"  name="jobsId" placeholder="jobsId" value="${jobsId }">
-			                      <input type="text" class="form-control" name="userCode" placeholder="岗位与人员code">
+			                      <input type="text" class="form-control" name="userCode" placeholder="岗位与人员code" class="data-input">
 			                    </div>
 			                    <div class="form-group">
 			                      <label for="">岗位与人员名称</label>
-			                      <input type="text" class="form-control" name="userName" placeholder="岗位与人员名称">
+			                      <input type="text" class="form-control" name="userName" placeholder="岗位与人员名称" class="data-input">
 			                    </div>
 			                  </div><!-- /.box-body -->
 			
@@ -153,7 +153,8 @@
 <!-- AdminLTE App -->
 <script src="http://static.workflow.com/dist/js/app.min.js" type="text/javascript"></script>
 <!-- page script -->
-<script type="text/javascript" src="/init.js"></script>
+<script src="http://static.workflow.com/cool/jquery.particleground.min.js" type="text/javascript"></script>
 <script src="http://static.vacn.com/layer/layer.js"></script>
+<script type="text/javascript" src="/init.js"></script>
 </html>
 

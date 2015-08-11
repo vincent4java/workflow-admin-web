@@ -105,5 +105,77 @@
 		    
 	         });
     	});
+    	$("tbody").on("click","button[name='update']",function(){	
+    		var  btn= $(this);
+    		var parent = btn.parent(); 
+    		var tr= btn.parent().parent();
+    		var table = tr.parent().parent();
+    		btn.attr("name","save");
+    		btn.text("保存")
+    		var tds = tr.find(".data-input");
+    		tds.each(function(i){
+    			var th = table.find('tr:eq(0) th:eq('+i+')');
+    			var html = '<input class="form-control" type="text"  name="'+th.attr("data-field")+'" value="'+$(this).text()+'" original-value="'+$(this).text()+'" >';
+    			$(this).html(html);
+    		});
+    		var cancel_btn ='<button name="cancel" class="btn btn-warning btn-flat">取消</button>';
+    		parent.append(cancel_btn);
+    	});
     	
+    	$("tbody").on("click","button[name='cancel']",function(){	
+    		var  btn= $(this);
+    		var save_btn = btn.parent().find("button[name='save']");
+    		save_btn.attr("name","update");
+    		save_btn.text("修改");
+    		var tds = btn.parent().parent().find(".data-input");
+    		tds.each(function(){
+    			var input = $(this).find("input");
+    			$(this).text(input.attr("original-value"));
+    		});
+    		$(this).remove();
+    		
+    	});
+    	
+    	$("tbody").on("click","button[name='save']",function(){	
+    		var  btn= $(this);
+    		var save_btn = btn.parent().find("button[name='save']");
+			var data = {};
+			var form = btn.parent().parent();
+			data['id']=btn.attr("data-id");
+			form.find("input").each(function(){
+				var val = $(this).val();
+				if(val!=''){
+					data[$(this).attr("name")]=$(this).val();
+				}
+			});
+			form.find("select").each(function(){
+				var val = $(this).val();
+				if(val!=''){
+					data[$(this).attr("name")]=$(this).val();
+				}
+			});
+ 			$.ajax({
+	             type: "POST",
+	             url: btn.attr("op-url"),
+	             contentType: 'application/json',
+	             dataType: 'json',
+	             data: JSON.stringify(data),
+	             success: function(data){
+	            	 layer.msg(data.msg);
+	            	 if(data.isSuccess==1){
+	            		btn.attr("name","update");
+	            		btn.text("修改");
+	            		var tds = btn.parent().parent().find(".data-input");
+	            		tds.each(function(){
+	            			console.log($(this));
+	            			var input = $(this).find("input");
+	            			$(this).text(input.val());
+	            		});
+	            		btn.parent().find("button[name='cancel']").remove();
+	            	 }
+	              }
+	         });  
+    	});
+    	
+
     });

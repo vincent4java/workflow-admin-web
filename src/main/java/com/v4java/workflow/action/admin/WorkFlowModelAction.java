@@ -65,8 +65,12 @@ public class WorkFlowModelAction extends BaseAction{
 				op.append("type=\"button\" op-url=\"/workFlowModel/updateWorkFlowModelStatus.do\" class=\"btn btn-warning btn-flat\">");
 				op.append(AdminConst.OP_STATUS_NAME[workFlowModelVO.getStatus()]);
 				op.append("</button>");
+				op.append("</button>");
 				op.append("<a href=\"/flowNode/findFlowNode/"+workFlowModelVO.getId()+".do\""+" class=\"btn btn-warning btn-flat\">编辑节点");
 				op.append("</a>");
+				op.append("<button name=\"update\" data-id=\"");
+				op.append(workFlowModelVO.getId());
+				op.append("\" op-url=\"/workFlowModel/updateWorkFlowModel.do\" class=\"btn btn-warning btn-flat\">修改");
 				workFlowModelVO.setOperation(op.toString());
 				op = null;
 			}
@@ -121,5 +125,27 @@ public class WorkFlowModelAction extends BaseAction{
 		
 		return updateStatus;
 	}
+
 	
+	/**
+	 * 更改工作流模板
+	 * @return
+	 */
+	@RequestMapping(value = "/updateWorkFlowModel",method = RequestMethod.POST)
+	public @ResponseBody UpdateStatus updateWorkFlowModel(@RequestBody WorkFlowModel workFlowModel){
+		UpdateStatus updateStatus = new UpdateStatus();
+		try {
+			int n  = workFlowModelService.updateWorkFlowModel(workFlowModel);
+			updateStatus.setIsSuccess(n);
+			updateStatus.setMsg("更改工作流模板失败");
+			if (n==1) {
+				updateStatus.setMsg("更改工作流模板成功");
+			}
+			updateStatus.setIsSuccess(n);
+		} catch (Exception e) {
+			LOGGER.error("更改工作流模板状态", e);
+		}
+		
+		return updateStatus;
+	}
 }

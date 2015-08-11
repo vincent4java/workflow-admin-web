@@ -62,6 +62,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <script src="http://static.workflow.com/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
     <!-- AdminLTE App -->
     <script src="http://static.workflow.com/dist/js/app.min.js" type="text/javascript"></script>
-
+	<script src="http://static.workflow.com/cool/jquery.particleground.min.js" type="text/javascript"></script>
+	<script type="text/javascript">
+	</script>
   </body>
 </html>

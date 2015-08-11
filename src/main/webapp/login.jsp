@@ -64,8 +64,13 @@ $(".stu_login_error").Validform({
 });
 });
 </script>
+<script src="http://static.workflow.com/cool/jquery.particleground.min.js" type="text/javascript"></script>
 <script type="text/javascript">
 $(function(){
+	$('#CAPTCHA').particleground({
+	    dotColor: '#ff0000',
+	    lineColor: '#ff0000'
+	});
 	$(".screenbg ul li").each(function(){
 		$(this).css("opacity","0");
 	});
@@ -99,8 +104,7 @@ $(function(){
 <body>
 <div id="tab">
   <div class="tab_box"> 
-    <!-- 学生登录开始 -->
-    <div >
+    <div id="login-div">
       <div class="stu_error_box"></div>
       <form action="login.do" method="post" class="stu_login_error">
         <div id="username">
@@ -115,7 +119,7 @@ $(function(){
         <div id="code">
           <label>验证码：</label>
           <input type="text" id="stu_code_hide" name="code" value="输入验证码" nullmsg="验证码不能为空！" datatype="*4-4" errormsg="验证码有4位数！" sucmsg="验证码验证通过！">
-          <img src="./login/captcha.jpg" title="点击更换" alt="验证码占位图"> </div>
+          <img src="./login/captcha.jpg" title="点击更换" alt="验证码占位图" id="CAPTCHA"> </div>
 <!--         <div id="remember">
           <input type="checkbox" name="remember">
           <label>记住密码</label>
@@ -125,7 +129,6 @@ $(function(){
         </div>
       </form>
     </div>
-   <!-- 学生登录结束-->
   </div>
 </div>
 <div class="screenbg">

@@ -80,8 +80,12 @@ public class JobsAction extends BaseAction{
 				op.append("type=\"button\" op-url=\"/jobs/updateJobsStatus.do\" class=\"btn btn-warning btn-flat\">");
 				op.append(AdminConst.OP_STATUS_NAME[jobsVO.getStatus()]);
 				op.append("</button>");
+				op.append("</button>");
 				op.append("<a href=\"/jobsUser/findJobsUser/"+jobsVO.getId()+".do\""+" class=\"btn btn-warning btn-flat\">添加人员");
 				op.append("</a>");
+				op.append("<button name=\"update\" data-id=\"");
+				op.append(+jobsVO.getId());
+				op.append("\" op-url=\"/jobs/updateJobs.do\" class=\"btn btn-warning btn-flat\">修改");
 				jobsVO.setOperation(op.toString());
 				op = null;
 			}
@@ -105,7 +109,7 @@ public class JobsAction extends BaseAction{
 		try {
 			int n  = jobsService.updateJobsStatus(jobs);
 			updateStatus.setIsSuccess(n);
-			updateStatus.setMsg("更新岗位失败");
+			updateStatus.setMsg("更新岗位状态失败");
 			if (n==1) {
 				int x =jobs.getStatus();
 				updateStatus.setTarget("status");
@@ -113,7 +117,7 @@ public class JobsAction extends BaseAction{
 				updateStatus.setStatusName(AdminConst.STATUS_NAME[x]);
 				updateStatus.setOpStatus(AdminConst.OP_STATUS[x]);
 				updateStatus.setOpStatusName(AdminConst.OP_STATUS_NAME[x]);
-				updateStatus.setMsg("更新岗位成功");
+				updateStatus.setMsg("更新岗位状态成功");
 			}
 			updateStatus.setIsSuccess(n);
 		} catch (Exception e) {
@@ -122,4 +126,26 @@ public class JobsAction extends BaseAction{
 		return updateStatus;
 	}
 	
+	
+	
+	/**
+	 * 更改岗位状态
+	 * @return
+	 */
+	@RequestMapping(value = "/updateJobs",method = RequestMethod.POST)
+	public @ResponseBody UpdateStatus updateJobs(@RequestBody Jobs jobs){
+		UpdateStatus updateStatus = new UpdateStatus();
+		try {
+			int n  = jobsService.updateJobs(jobs);
+			updateStatus.setIsSuccess(n);
+			updateStatus.setMsg("更新岗位失败");
+			if (n==1) {
+				updateStatus.setMsg("更新岗位成功");
+			}
+			updateStatus.setIsSuccess(n);
+		} catch (Exception e) {
+			LOGGER.error("更改岗位状态错误", e);
+		}
+		return updateStatus;
+	}
 }

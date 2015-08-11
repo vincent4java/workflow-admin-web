@@ -85,9 +85,9 @@
 					data-side-pagination="server" data-pagination="true" data-page-list="[10, 20, 50]" data-search="false">
 						   <thead>
 						    <tr>
-					        <th data-field="name" data-align="center" >名称</th>
-					        <th data-field="description" data-align="center" >描述</th>
-					        <th data-field="statusName" data-align="center" class="col-md-1 status">是否可用</th>
+					        <th data-field="name" data-align="center" class="data-input">名称</th>
+					        <th data-field="description" data-align="center" class="data-input">描述</th>
+					        <th data-field="statusName" data-align="center" class="col-md-1 status ">是否可用</th>
 					        <th data-field="createTimeName" data-align="center" >创建时间</th>
 					        <th data-field="updateTimeName" data-align="center" >最近修改时间</th>
 					        <th data-field="operation" data-align="center" class="col-md-2">操作</th>
@@ -151,8 +151,8 @@
 <!-- AdminLTE App -->
 <script src="http://static.workflow.com/dist/js/app.min.js" type="text/javascript"></script>
 <!-- page script -->
-<script type="text/javascript" src="/init.js"></script>
 <script src="http://static.vacn.com/layer/layer.js"></script>
-
+<script src="http://static.workflow.com/cool/jquery.particleground.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="/init.js"></script>
 </html>
 
