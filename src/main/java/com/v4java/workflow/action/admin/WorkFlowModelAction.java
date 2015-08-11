@@ -118,7 +118,6 @@ public class WorkFlowModelAction extends BaseAction{
 				updateStatus.setOpStatusName(AdminConst.OP_STATUS_NAME[x]);
 				updateStatus.setMsg("更改工作流模板状态成功");
 			}
-			updateStatus.setIsSuccess(n);
 		} catch (Exception e) {
 			LOGGER.error("更改工作流模板状态", e);
 		}
@@ -141,7 +140,6 @@ public class WorkFlowModelAction extends BaseAction{
 			if (n==1) {
 				updateStatus.setMsg("更改工作流模板成功");
 			}
-			updateStatus.setIsSuccess(n);
 		} catch (Exception e) {
 			LOGGER.error("更改工作流模板状态", e);
 		}

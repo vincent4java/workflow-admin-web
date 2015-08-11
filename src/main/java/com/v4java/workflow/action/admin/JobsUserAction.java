@@ -17,7 +17,6 @@ import com.alibaba.fastjson.JSON;
 import com.v4java.utils.DateUtil;
 import com.v4java.workflow.common.BaseAction;
 import com.v4java.workflow.constant.AdminConst;
-import com.v4java.workflow.pojo.Jobs;
 import com.v4java.workflow.pojo.JobsUser;
 import com.v4java.workflow.query.admin.JobsUserQuery;
 import com.v4java.workflow.redis.util.JedisUtil;
@@ -111,7 +110,7 @@ public class JobsUserAction extends BaseAction{
 				userVO.setUserName(jobsUser.getUserName());
 				List<Integer> jobIds = new ArrayList<Integer>();
 				for (JobsUser user : jobs) {
-					if (user.getStatus()==0) {
+					if (user.getStatus()==AdminConst.STATUS_TRUE) {
 						jobIds.add(user.getJobsId());
 					}
 				}

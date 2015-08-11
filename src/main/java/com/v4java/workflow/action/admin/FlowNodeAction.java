@@ -54,18 +54,20 @@ public class FlowNodeAction extends BaseAction {
 			FlowNode flowNode = flowNodeService.findFlowNodeById(id);
 			StringBuffer html = new StringBuffer();
 			html.append("<div class=\"form-group\" id=\"jobsIdDiv\" hidden=\"hidden\">");
-			html.append("<label for=\"\">岗位</label>");
+			html.append("<label for=\"\">结点</label>");
 			html.append("<select name=\"jobsId\" class=\"form-control\" ");
 			html.append("org-val=\"");
 			html.append(flowNode.getJobsId());
 			html.append("\" ");
 			html.append(" >");
  			for (JobsVO jobsVO : jobsVOs) {
-				html.append("<option value=\"");
-				html.append(jobsVO.getId());
-				html.append("\">");
-				html.append(jobsVO.getName());
-				html.append("</option>");
+ 				if (jobsVO.getStatus()==AdminConst.STATUS_TRUE) {
+ 					html.append("<option value=\"");
+ 					html.append(jobsVO.getId());
+ 					html.append("\">");
+ 					html.append(jobsVO.getName());
+ 					html.append("</option>");
+				}
 			}
  			html.append("<option value=\"0\">无</option>");
 			html.append("</select>");
@@ -132,14 +134,16 @@ public class FlowNodeAction extends BaseAction {
 			List<JobsVO> jobsVOs = jobsService.findJobsBySystemId(jobsQuery);
 			StringBuffer html = new StringBuffer();
 			html.append("<div class=\"form-group\" id=\"jobsIdDiv\">");
-			html.append("<label for=\"\">岗位</label>");
+			html.append("<label for=\"\">结点</label>");
 			html.append("<select name=\"jobsId\" class=\"form-control\" >");
  			for (JobsVO jobsVO : jobsVOs) {
-				html.append("<option value=\"");
-				html.append(jobsVO.getId());
-				html.append("\">");
-				html.append(jobsVO.getName());
-				html.append("</option>");
+ 				if (jobsVO.getStatus()==AdminConst.STATUS_TRUE) {
+ 					html.append("<option value=\"");
+ 					html.append(jobsVO.getId());
+ 					html.append("\">");
+ 					html.append(jobsVO.getName());
+ 					html.append("</option>");
+				}
 			}
  			html.append("<option value=\"0\">无</option>");
 			html.append("</select>");
@@ -222,7 +226,7 @@ public class FlowNodeAction extends BaseAction {
 	
 	
 	/**
-	 * 更改岗位状态
+	 * 更改结点状态
 	 * @return
 	 */
 	@RequestMapping(value = "/updateFlowNodeStatus",method = RequestMethod.POST)
@@ -231,7 +235,7 @@ public class FlowNodeAction extends BaseAction {
 		try {
 			int n  = flowNodeService.updateFlowNodeStatus(flowNode);
 			updateStatus.setIsSuccess(n);
-			updateStatus.setMsg("更新岗位失败：当前结点正在使用");
+			updateStatus.setMsg("更新结点失败：当前结点正在使用");
 			if (n==1) {
 				int x =flowNode.getStatus();
 				updateStatus.setTarget("status");
@@ -239,12 +243,32 @@ public class FlowNodeAction extends BaseAction {
 				updateStatus.setStatusName(AdminConst.STATUS_NAME[x]);
 				updateStatus.setOpStatus(AdminConst.OP_STATUS[x]);
 				updateStatus.setOpStatusName(AdminConst.OP_STATUS_NAME[x]);
-				updateStatus.setMsg("更新岗位成功");
+				updateStatus.setMsg("更新结点成功");
 			}
-			updateStatus.setIsSuccess(n);
 		} catch (Exception e) {
-			LOGGER.error("更改岗位状态错误", e);
+			LOGGER.error("更改结点状态错误", e);
 		}
 		return updateStatus;
 	}
+
+	/**
+	 * 更改结点状态
+	 * @return
+	 */
+	@RequestMapping(value = "/updateFlowNode",method = RequestMethod.POST)
+	public @ResponseBody UpdateStatus updateFlowNode(@RequestBody FlowNode flowNode){
+		UpdateStatus updateStatus = new UpdateStatus();
+		try {
+			int n  = flowNodeService.updateFlowNode(flowNode);
+			updateStatus.setIsSuccess(n);
+			updateStatus.setMsg("更新结点失败");
+			if (n==1) {
+				updateStatus.setMsg("更新结点成功");
+			}
+		} catch (Exception e) {
+			LOGGER.error("更改结点错误", e);
+		}
+		return updateStatus;
+	}
+	
 }
