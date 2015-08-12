@@ -58,7 +58,7 @@
               			<!-- general form elements -->
 					              <div class="box box-primary">
 					                <div class="box-header">
-					                  <h3 class="box-title">新增节点</h3>
+					                  <h3 class="box-title">修改节点</h3>
 					                </div><!-- /.box-header -->
 					                <!-- form start -->
 					                <form role="form" action="/flowNode/updateFlowNode.do" method="post" name="flowNode">
@@ -215,7 +215,7 @@
 	             data: JSON.stringify(data),
 	             success: function(data){
 						if(data==1||data=="1"){
-							layer.msg("新增成功");
+							layer.msg("修改成功");
 							$("button[name='querySearch']").trigger("click");
 					          $("a[href='view']").tab('show');//显示当前选中的链接及关联的content 
 					          $("#add").removeClass("active");
@@ -226,7 +226,7 @@
 					        	  }
 					          });
 						}else{
-							layer.msg("新增失败");
+							layer.msg("修改失败");
 						}
 	             }
 	         });  
