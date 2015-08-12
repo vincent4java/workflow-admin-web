@@ -296,7 +296,7 @@
 						          $("#add").removeClass("active");
 						          $("#view").addClass("active");
 						          $("form").find("input").each(function(){
-						        	  if($(this).attr("name")=="modelId"){
+						        	  if($(this).attr("name")!="modelId"){
 						        		  $(this).val("");
 						        	  }
 						          });

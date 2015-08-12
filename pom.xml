@@ -14,10 +14,10 @@
 
 	<dependencies>
 		<!-- 工具包 -->
-		<dependency>
+<!-- 		<dependency>
 			<groupId>com.v4java</groupId>
 			<artifactId>workflow-redis</artifactId>
-		</dependency>
+		</dependency> -->
 		<!-- -->
 
 		<dependency>

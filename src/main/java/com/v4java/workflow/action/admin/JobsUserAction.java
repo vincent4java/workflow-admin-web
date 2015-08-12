@@ -13,13 +13,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.alibaba.fastjson.JSON;
 import com.v4java.utils.DateUtil;
 import com.v4java.workflow.common.BaseAction;
 import com.v4java.workflow.constant.AdminConst;
 import com.v4java.workflow.pojo.JobsUser;
 import com.v4java.workflow.query.admin.JobsUserQuery;
-import com.v4java.workflow.redis.util.JedisUtil;
 import com.v4java.workflow.service.admin.IJobsUserService;
 import com.v4java.workflow.vo.BTables;
 import com.v4java.workflow.vo.UpdateStatus;
@@ -116,7 +114,7 @@ public class JobsUserAction extends BaseAction{
 				}
 				userVO.setJobsIds(jobIds);
 				userVO.setSystemId(getSystemId());
-				JedisUtil.getInstance().set(getXf9System().getSystemCode()+":"+userVO.getUserCode(), JSON.toJSONString(userVO));
+				/*JedisUtil.getInstance().set(getXf9System().getSystemCode()+":"+userVO.getUserCode(), JSON.toJSONString(userVO));*/
 			}
 		} catch (Exception e) {
 			LOGGER.error("添加岗位人员关系失败", e);
