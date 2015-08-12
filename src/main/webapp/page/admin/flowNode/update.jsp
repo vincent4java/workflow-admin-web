@@ -172,7 +172,7 @@
 	  		var form = $(this).parent().parent();
 			var data = {};
 			var type = $("select[name='nodeTypeId']").val();
-			data["modelId"]=$("#modelId").val();
+			data["id"]=$("#id").val();
 			data["name"]=$("input[name='wfname']").val();
 			data["nodeTypeId"]=type;
 			data["sort"]=$("input[name='sort']").val();
@@ -214,7 +214,7 @@
 	             dataType: 'json',
 	             data: JSON.stringify(data),
 	             success: function(data){
-						if(data==1||data=="1"){
+						if(data.isSuccess==1||data.isSuccess=="1"){
 							layer.msg("修改成功");
 							$("button[name='querySearch']").trigger("click");
 					          $("a[href='view']").tab('show');//显示当前选中的链接及关联的content 
