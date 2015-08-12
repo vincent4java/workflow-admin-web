@@ -65,7 +65,7 @@
 					                  <div class="box-body">
 					                    <div class="form-group">
 					                      <label for="">节点名称</label>
-					                      <input type="hidden" id="modelId" name="modelId" value="${flowNode.id }">
+					                      <input type="hidden" id="id" name="id" value="${flowNode.id }">
 					                      <input type="text" class="form-control" name="name" placeholder="节点名称" value="${flowNode.name }">
 					                    </div>
 					                  <div class="form-group" id="nodeTypeDiv">
@@ -221,7 +221,7 @@
 					          $("#add").removeClass("active");
 					          $("#view").addClass("active");
 					          $("form").find("input").each(function(){
-					        	  if($(this).attr("name")=="modelId"){
+					        	  if($(this).attr("name")=="id"){
 					        		  $(this).val("");
 					        	  }
 					          });
